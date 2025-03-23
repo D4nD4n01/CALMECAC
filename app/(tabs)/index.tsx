@@ -34,7 +34,7 @@ export default function HomeScreen() {
     <>
       <div style={{color:"white" ,textAlign:"center" , background:"gray"}}>
         {saludo} memo y aran ? {visible? zape:zape2}
-        <div></div>
+        <div>hola Vicky</div>
       </div>
       <button onClick={presionado}> clickeame</button>
     </>
