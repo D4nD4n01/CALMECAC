@@ -1,56 +1,43 @@
 import { Image, StyleSheet, Platform } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { useState, useEffect } from 'react';
 
 export default function HomeScreen() {
+
+ 
+
+  const [saludo,setSaludo] = useState("Que tal estan")
+
+  const [visible,setVisible] = useState(false)
+  const [visible2,setVisible2] = useState(true)
+
+
+  const [zape,Zape] = useState("Este es un zape para Memin")
+  const [zape2,Zape2] = useState("Este es un zape para Arán")
+
+  useEffect (() =>{
+    visible? setSaludo("que tal estan") : setSaludo("como estan")
+  },[zape,zape2]);
+
+  const presionado = () =>{
+    visible ? setVisible(false) : setVisible(true)
+    visible ? Zape("Hola memo") : Zape2("Hola aran")
+    visible ? Zape2("Este es un zape para Arán") : Zape("Este es un zape para Memin")
+    visible ? console.log(zape2) : console.log(zape)
+    
+  }
+
+  // visible ? (visible2? 1 : 2) : (3)
+  
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <>
+      <div style={{color:"white" ,textAlign:"center" , background:"gray"}}>
+        {saludo} memo y aran ? {visible? zape:zape2}
+        <div></div>
+      </div>
+      <button onClick={presionado}> clickeame</button>
+    </>
   );
 }
 
