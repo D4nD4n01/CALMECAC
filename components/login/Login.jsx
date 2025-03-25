@@ -7,6 +7,7 @@ const Login = ({ isWeb, acount }) => {
 
   const navigation = useNavigation();
   const E6CCE6 = "#000";
+  let suma= 5+ 5;
 
   return (
     <View
