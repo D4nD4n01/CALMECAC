@@ -6,12 +6,13 @@ import { useNavigation } from "@react-navigation/native";
 const Login = ({ isWeb, acount }) => {
 
   const navigation = useNavigation();
+  const E6CCE6 = "#000";
 
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: isWeb ? "#E6CCE6" : "#E3F2FD", // Morado claro en web, azul claro en móvil
+        backgroundColor: isWeb ? E6CCE6 : "#E3F2FD", // Morado claro en web, azul claro en móvil
         justifyContent: "center",
         alignItems: "center",
         padding: isWeb ? 50 : 0,
