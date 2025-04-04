@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 // Importar la imagen del logo
 import logo from "../../assets/images/logo.jpg";  // Asegúrate de que la ruta sea correcta
 
-const Login = ({ isWeb, acount }) => {
+const Login = ({ isWeb }) => {
   const navigation = useNavigation();
+  const [usuario, setUsuario] = useState("");  // Guardar el correo
+  const [password, setPassword] = useState("");  // Guardar la contraseña
 
-  console.log("es: ", isWeb);
-  console.log("Cuentas: ", acount);
+  const acount = [
+    { user: "Memin@gmail.com", pass: "Memin" },
+    { user: "Arandez@gmail.com", pass: "Arancel" },
+    { user: "Pulido@gmail.com", pass: "qtal" },
+  ];
+
+  const ingresar = () => {
+    // Validar si las credenciales coinciden con alguna cuenta
+    const validUser = acount.find(
+      (account) => account.user === usuario && account.pass === password
+    );
+
+    // Si se encontró un usuario y la contraseña es correcta, navega a "MyGroups"
+    if (validUser) {
+      navigation.navigate("MyGroups");
+    } else {
+      alert("Usuario o contraseña incorrectos.");
+    }
+  };
 
   return (
     <View
@@ -80,6 +99,8 @@ const Login = ({ isWeb, acount }) => {
           }}
           placeholder="Ingrese su correo"
           placeholderTextColor="#666"
+          value={usuario}
+          onChangeText={setUsuario}  // Actualiza el estado del correo
         />
 
         <TextInput
@@ -95,6 +116,8 @@ const Login = ({ isWeb, acount }) => {
           placeholder="Ingrese su contraseña"
           secureTextEntry
           placeholderTextColor="#666"
+          value={password}
+          onChangeText={setPassword}  // Actualiza el estado de la contraseña
         />
 
         <TouchableOpacity
@@ -104,6 +127,7 @@ const Login = ({ isWeb, acount }) => {
             borderRadius: 5,
             alignItems: "center",
           }}
+          onPress={ingresar}  // Llama a la función ingresar al presionar el botón
         >
           <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
             Acceder
