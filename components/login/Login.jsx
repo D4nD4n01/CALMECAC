@@ -1,12 +1,15 @@
 import React from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import _layout from "../../app/_layout.tsx"
 
+// Importar la imagen del logo
+import logo from "../../assets/images/logo.jpg";  // Asegúrate de que la ruta sea correcta
 
 const Login = ({ isWeb, acount }) => {
-
   const navigation = useNavigation();
+
+  console.log("es: ", isWeb);
+  console.log("Cuentas: ", acount);
 
   return (
     <View
@@ -27,21 +30,16 @@ const Login = ({ isWeb, acount }) => {
           paddingVertical: 30,
         }}
       >
-        <View
+        {/* Agregar la imagen del logo */}
+        <Image
+          source={logo}  // Usa la variable `logo` que importaste
           style={{
             width: 80,
             height: 80,
-            backgroundColor: "gray",
             borderRadius: 40,
-            justifyContent: "center",
-            alignItems: "center",
+            backgroundColor: "gray",  // Si no tienes la imagen disponible, un color de fondo para el círculo
           }}
-        >
-            <Image 
-              source={require('C:\proyectos\proyectosSublimeText\CALMECAC\assets\images\logo.jpg')}
-              style={{width:80,height:80,borderRadius:40}}
-            />    
-        </View>
+        />
       </View>
 
       {/* Contenedor del formulario */}
@@ -67,7 +65,7 @@ const Login = ({ isWeb, acount }) => {
             color: isWeb ? "#4B0082" : "#0D47A1",
           }}
         >
-          Inicio de Sesión 
+          Inicio de Sesión
         </Text>
 
         <TextInput

@@ -18,5 +18,7 @@ export default function Index() {
       pass:"qtal"
     },
   ]
+
+  console.log("index: ",isWeb)
   return <Login isWeb={isWeb} acount = {acount}/>;
 }
