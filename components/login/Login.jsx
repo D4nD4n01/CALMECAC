@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import _layout from "../../app/_layout.tsx"
 
 
 const Login = ({ isWeb, acount }) => {
@@ -36,7 +37,10 @@ const Login = ({ isWeb, acount }) => {
             alignItems: "center",
           }}
         >
-          <Text style={{ color: "white" }}>Logo</Text>
+            <Image 
+              source={require('C:\proyectos\proyectosSublimeText\CALMECAC\assets\images\logo.jpg')}
+              style={{width:80,height:80,borderRadius:40}}
+            />    
         </View>
       </View>
 
@@ -63,7 +67,7 @@ const Login = ({ isWeb, acount }) => {
             color: isWeb ? "#4B0082" : "#0D47A1",
           }}
         >
-          Inicio de Sesión
+          Inicio de Sesión 
         </Text>
 
         <TextInput

@@ -1,8 +1,8 @@
 import { Platform } from "react-native";
-import Login from "../../components/login/Login.jsx";
+import Login from "../components/login/Login.jsx";
 
-export default function HomeScreen() {
-  const isWeb = Platform.OS === "web"; // Detecta si es web o móvil
+export default function Index() {
+  const isWeb = Platform.OS === "web"; 
 
   const acount = [
     {
@@ -18,8 +18,5 @@ export default function HomeScreen() {
       pass:"qtal"
     },
   ]
-      
-  
-
   return <Login isWeb={isWeb} acount = {acount}/>;
 }
