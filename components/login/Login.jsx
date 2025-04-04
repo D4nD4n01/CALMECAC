@@ -9,11 +9,12 @@ const Login = ({ isWeb }) => {
   const navigation = useNavigation();
   const [usuario, setUsuario] = useState("");  // Guardar el correo
   const [password, setPassword] = useState("");  // Guardar la contraseña
-
+6
   const acount = [
     { user: "Memin@gmail.com", pass: "Memin" },
     { user: "Arandez@gmail.com", pass: "Arancel" },
     { user: "Pulido@gmail.com", pass: "qtal" },
+    { user: "Roberto", pass: "123" },
   ];
 
   const ingresar = () => {
@@ -24,11 +25,17 @@ const Login = ({ isWeb }) => {
 
     // Si se encontró un usuario y la contraseña es correcta, navega a "MyGroups"
     if (validUser) {
+      setUsuario("")
+      setPassword("")
       navigation.navigate("MyGroups");
     } else {
       alert("Usuario o contraseña incorrectos.");
     }
   };
+
+  const pasarPantalla = () =>{
+
+  }
 
   return (
     <View
