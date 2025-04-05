@@ -5,11 +5,12 @@ import { useNavigation } from "@react-navigation/native";
 // Importar la imagen del logo
 import logo from "../../assets/images/logo.jpg";  // Asegúrate de que la ruta sea correcta
 
-const Login = ({ isWeb }) => {
+const Login = ({ }) => {
   const navigation = useNavigation();
   const [usuario, setUsuario] = useState("");  // Guardar el correo
   const [password, setPassword] = useState("");  // Guardar la contraseña
-6
+
+
   const acount = [
     { user: "Memin@gmail.com", pass: "Memin" },
     { user: "Arandez@gmail.com", pass: "Arancel" },
@@ -23,7 +24,6 @@ const Login = ({ isWeb }) => {
       (account) => account.user === usuario && account.pass === password
     );
 
-    // Si se encontró un usuario y la contraseña es correcta, navega a "MyGroups"
     if (validUser) {
       setUsuario("")
       setPassword("")
@@ -41,16 +41,16 @@ const Login = ({ isWeb }) => {
     <View
       style={{
         flex: 1,
-        backgroundColor: isWeb ? "#E6CCE6" : "#E3F2FD", // Morado claro en web, azul claro en móvil
+        backgroundColor:"#E3F2FD", // Morado claro en web, azul claro en móvil
         justifyContent: "center",
         alignItems: "center",
-        padding: isWeb ? 50 : 0,
+        padding:0,
       }}
     >
       {/* Logo */}
       <View
         style={{
-          backgroundColor: isWeb ? "#4B0082" : "#2196F3", // Morado oscuro en web, azul en móvil
+          backgroundColor:"#2196F3", // Morado oscuro en web, azul en móvil
           width: "100%",
           alignItems: "center",
           paddingVertical: 30,
@@ -72,7 +72,7 @@ const Login = ({ isWeb }) => {
       <View
         style={{
           backgroundColor: "white",
-          width: isWeb ? "40%" : "85%",
+          width:"85%",
           padding: 20,
           borderRadius: 10,
           shadowColor: "#000",
@@ -88,7 +88,7 @@ const Login = ({ isWeb }) => {
             fontWeight: "bold",
             textAlign: "center",
             marginBottom: 20,
-            color: isWeb ? "#4B0082" : "#0D47A1",
+            color:"#0D47A1",
           }}
         >
           Inicio de Sesión
@@ -129,7 +129,7 @@ const Login = ({ isWeb }) => {
 
         <TouchableOpacity
           style={{
-            backgroundColor: isWeb ? "#4B0082" : "#0D47A1",
+            backgroundColor:"#0D47A1",
             paddingVertical: 10,
             borderRadius: 5,
             alignItems: "center",
@@ -152,7 +152,7 @@ const Login = ({ isWeb }) => {
           ¿No tienes cuenta?{" "}
           <Text
             style={{
-              color: isWeb ? "#4B0082" : "#0D47A1",
+              color:"#0D47A1",
               fontWeight: "bold",
             }}
             onPress={() => navigation.navigate("Register")}

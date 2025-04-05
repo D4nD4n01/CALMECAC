@@ -1,20 +1,24 @@
 import React from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 
-const Register = ({ isWeb }) => {
+const Register = ({}) => {
+
+  const reedirigir = () =>{
+    navigation.replace("Login");
+  }
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: isWeb ? "#E6CCE6" : "#E3F2FD",
+        backgroundColor: "#E3F2FD",
         justifyContent: "center",
         alignItems: "center",
-        padding: isWeb ? 50 : 0,
+        padding: 0,
       }}
     >
       <View
         style={{
-          backgroundColor: isWeb ? "#4B0082" : "#2196F3",
+          backgroundColor:"#2196F3",
           width: "100%",
           alignItems: "center",
           paddingVertical: 30,
@@ -28,7 +32,7 @@ const Register = ({ isWeb }) => {
       <View
         style={{
           backgroundColor: "white",
-          width: isWeb ? "40%" : "85%",
+          width:"85%",
           padding: 20,
           borderRadius: 10,
           shadowColor: "#000",
@@ -44,7 +48,7 @@ const Register = ({ isWeb }) => {
             fontWeight: "bold",
             textAlign: "center",
             marginBottom: 20,
-            color: isWeb ? "#4B0082" : "#0D47A1",
+            color:"#0D47A1",
           }}
         >
           Crear Cuenta
@@ -95,13 +99,14 @@ const Register = ({ isWeb }) => {
 
         <TouchableOpacity
           style={{
-            backgroundColor: isWeb ? "#4B0082" : "#0D47A1",
+            backgroundColor:"#0D47A1",
             paddingVertical: 10,
             borderRadius: 5,
             alignItems: "center",
           }}
         >
-          <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
+          <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}
+          onPress={reedirigir}>
             Registrarse
           </Text>
         </TouchableOpacity>
