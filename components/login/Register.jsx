@@ -1,11 +1,16 @@
 import React from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 
 const Register = ({}) => {
+
+  const navigation = useNavigation();
 
   const reedirigir = () =>{
     navigation.replace("Login");
   }
+  
   return (
     <View
       style={{
@@ -104,9 +109,9 @@ const Register = ({}) => {
             borderRadius: 5,
             alignItems: "center",
           }}
+          onPress={reedirigir}
         >
-          <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}
-          onPress={reedirigir}>
+          <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
             Registrarse
           </Text>
         </TouchableOpacity>

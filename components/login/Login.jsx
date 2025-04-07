@@ -10,11 +10,13 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import logo from "../../assets/images/logo.jpg";
+import Loading from "../../utils/Loading"
 
 const Login = () => {
   const navigation = useNavigation();
   const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const acount = [
     { userID: 1, user: "Memin", pass: "Memin" },
@@ -49,16 +51,20 @@ const Login = () => {
 
   useEffect(() => {
     const verificarSesion = async () => {
+      setLoading(true)
       const userID = await obtenerUserID();
       if (userID) {
+        setLoading(false);
         navigation.replace("MyGroups"); // Reemplazar para no regresar a login
       }
+      setLoading(false);
     };
 
     verificarSesion();
   }, []);
 
   const ingresar = async () => {
+    setLoading(true)
     const validUser = acount.find(
       (account) => account.user === usuario && account.pass === password
     );
@@ -67,14 +73,24 @@ const Login = () => {
       await guardarUserID(validUser.userID);
       setUsuario("");
       setPassword("");
+      setLoading(false)
       navigation.replace("MyGroups");
     } else {
+      setLoading(false)
       alert("Usuario o contraseña incorrectos.");
     }
   };
 
+  if (loading) {
+    return (
+      <Loading />
+    );
+  }
+
   return (
     <View style={{ flex: 1, backgroundColor: "#E3F2FD", justifyContent: "center", alignItems: "center" }}>
+
+      
       <View style={{ backgroundColor: "#2196F3", width: "100%", alignItems: "center", paddingVertical: 30 }}>
         <Image source={logo} style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: "gray" }} />
       </View>

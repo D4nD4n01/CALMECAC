@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image, ScrollView } from "react-native";
 import logo from "../../assets/images/logo.jpg"; // Asegúrate de que esta ruta esté bien
+import { Platform } from "react-native";
+
 
 const Consult = ({ navigation }) => {
+
   const [numeroControl, setNumeroControl] = useState("");
   const [resultados, setResultados] = useState([]);
 

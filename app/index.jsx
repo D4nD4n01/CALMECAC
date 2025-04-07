@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import Login from "@/components/login/Login";
 
 export default function Index() {
   const navigation = useNavigation();
@@ -10,8 +11,7 @@ export default function Index() {
     if (isWeb) {
       navigation.replace("Consult"); // redirige a la pantalla web
     } else {
-      //Alert("ventana móvil")
-      navigation.replace("Login"); // redirige a Login en móvil
+      navigation.replace("Login");
     }
   }, []);
 

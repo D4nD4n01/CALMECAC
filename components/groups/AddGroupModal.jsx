@@ -1,6 +1,8 @@
 // src/groups/AddGroupModal.jsx
 import React from "react";
-import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Platform } from "react-native";
+
+const isWeb = Platform.OS === "web";
 
 const AddGroupModal = ({ visible, onClose }) => {
   return (
@@ -35,7 +37,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalContainer: {
-    width: "40%",
+    width: isWeb ?"40%" : "80%",  
     backgroundColor: "#E3F2FD",
     borderRadius: 10,
     padding: 20,
