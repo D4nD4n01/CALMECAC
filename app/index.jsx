@@ -10,6 +10,7 @@ export default function Index() {
     if (isWeb) {
       navigation.replace("Consult"); // redirige a la pantalla web
     } else {
+      //Alert("ventana móvil")
       navigation.replace("Login"); // redirige a Login en móvil
     }
   }, []);

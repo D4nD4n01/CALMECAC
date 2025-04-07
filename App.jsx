@@ -4,7 +4,6 @@ import { Platform } from "react-native";
 
 export default function App() {
 
-  console.log("Primero: ", isWeb)
   return (
     <NavigationContainer>
       <AppNavigator/>

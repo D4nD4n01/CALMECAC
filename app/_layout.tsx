@@ -2,7 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Login from "../components/login/Login.jsx";  
 import Register from "../components/login/Register.jsx"; 
 import MyGroups from "../components/groups/MyGroups.jsx"
-import Index from "./index.jsx";
+import Index from "./Index.jsx";
 import Consult from "../components/web/Consult.jsx"
 
 const Stack = createStackNavigator();
