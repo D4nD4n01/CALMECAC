@@ -1,79 +1,97 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, Platform } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
+import Group from "./Group.jsx"
+
+import AddGroupModal from "./AddGroupModal";
 
 const MyGroups = () => {
-  const [groups, setGroups] = useState([]); // Inicialmente vacío
+  const navigation = useNavigation();
+  const [groups, setGroups] = useState([]);
+  const [showAddGroup, setShowAddGroup] = useState(false);
 
-  const addGroup = () => {
-    alert("Botón aún no definido; próximamente estará terminado");
+  const gruposData = [
+    { IdProfesor: 1, IdGroup: 1, Groups: { IntGrado: 3, StrHour: "9:00-10:00", StrSalon: "FFA" } },
+    { IdProfesor: 1, IdGroup: 2, Groups: { IntGrado: 2, StrHour: "10:00-11:00", StrSalon: "FF1" } },
+    { IdProfesor: 1, IdGroup: 3, Groups: { IntGrado: 1, StrHour: "8:00-9:00", StrSalon: "FF9" } },
+    { IdProfesor: 2, IdGroup: 4, Groups: { IntGrado: 3, StrHour: "11:00-12:00", StrSalon: "FFE" } },
+    { IdProfesor: 2, IdGroup: 5, Groups: { IntGrado: 2, StrHour: "7:00-8:00", StrSalon: "FFA" } },
+    { IdProfesor: 3, IdGroup: 6, Groups: { IntGrado: 1, StrHour: "12:00-13:00", StrSalon: "FF9" } },
+    { IdProfesor: 3, IdGroup: 7, Groups: { IntGrado: 2, StrHour: "13:00-14:00", StrSalon: "FF1" } },
+    { IdProfesor: 3, IdGroup: 8, Groups: { IntGrado: 3, StrHour: "14:00-15:00", StrSalon: "FFE" } },
+    { IdProfesor: 1, IdGroup: 9, Groups: { IntGrado: 2, StrHour: "15:00-16:00", StrSalon: "FF1" } },
+    { IdProfesor: 2, IdGroup: 10, Groups: { IntGrado: 1, StrHour: "16:00-17:00", StrSalon: "FF9" } },
+  ];
+
+  const obtenerUserID = async () => {
+    try {
+      return Platform.OS === "web" ? localStorage.getItem("userID") : await AsyncStorage.getItem("userID");
+    } catch (error) {
+      console.error("Error al obtener userID:", error);
+    }
   };
+
+  const cerrarSesion = async () => {
+    try {
+      if (Platform.OS === "web") {
+        localStorage.removeItem("userID");
+      } else {
+        await AsyncStorage.removeItem("userID");
+      }
+      navigation.replace("Login");
+    } catch (error) {
+      console.error("Error cerrando sesión:", error);
+    }
+  };
+
+  useEffect(() => {
+    const filtrarGrupos = async () => {
+      const id = await obtenerUserID();
+      if (id) {
+        const filtrados = gruposData
+          .filter((g) => g.IdProfesor === parseInt(id))
+          .map((g) => ({
+            nombre: `Grupo ${g.IdGroup} - Grado ${g.Groups.IntGrado}`,
+            salon: g.Groups.StrSalon,
+            hora: g.Groups.StrHour,
+          }));
+        setGroups(filtrados);
+      }
+    };
+
+    filtrarGrupos();
+  }, []);
 
   return (
     <View style={{ flex: 1, padding: 16, backgroundColor: "#E3F2FD" }}>
-      {/* Encabezado */}
-      <View
-        style={{
-          backgroundColor: "#2196F3", // Azul claro
-          paddingVertical: 16,
-          paddingHorizontal: 24,
-          borderTopLeftRadius: 10,
-          borderTopRightRadius: 10,
-          marginBottom: 16,
-        }}
-      >
-        <Text style={{ fontSize: 24, fontWeight: "bold", color: "white" }}>
-          Mis Grupos
-        </Text>
-      </View>
-
-      {/* Botón */}
-      <View style={{ marginBottom: 32, alignItems: "center" }}>
-        <TouchableOpacity
-          onPress={addGroup}
-          style={{
-            backgroundColor: "#0D47A1", // Azul oscuro
-            paddingVertical: 12,
-            paddingHorizontal: 24,
-            borderRadius: 5,
-          }}
-        >
-          <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
-            Agregar grupo
-          </Text>
+      <View style={{ backgroundColor: "#2196F3", paddingVertical: 16, paddingHorizontal: 24, borderRadius: 10, marginBottom: 16, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+        <Text style={{ fontSize: 24, fontWeight: "bold", color: "white" }}>Mis Grupos</Text>
+        <TouchableOpacity onPress={cerrarSesion}>
+          <Text style={{ color: "white", fontWeight: "bold", fontSize: 14 }}>Cerrar sesión</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Mostrar grupos si existen, sino mostrar mensaje */}
+      <View style={{ marginBottom: 32, alignItems: "center" }}>
+        <TouchableOpacity
+          onPress={() => setShowAddGroup(true)}
+          style={{ backgroundColor: "#0D47A1", paddingVertical: 12, paddingHorizontal: 24, borderRadius: 5 }}
+        >
+          <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>Agregar grupo</Text>
+        </TouchableOpacity>
+      </View>
+
       {groups && groups.length > 0 ? (
         groups.map((group, index) => (
-          <View
-            key={index}
-            style={{
-              backgroundColor: "white",
-              padding: 16,
-              marginBottom: 12,
-              borderRadius: 10,
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: 0.1,
-              shadowRadius: 4,
-              elevation: 3,
-            }}
-          >
-            <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-              Nombre: {group.nombre}
-            </Text>
-            <Text>Salón: {group.salon}</Text>
-            <Text>Hora: {group.hora}</Text>
-          </View>
+          <Group key={index} nombre={group.nombre} salon={group.salon} hora={group.hora} />
         ))
       ) : (
         <View style={{ marginTop: 50, alignItems: "center" }}>
-          <Text style={{ fontSize: 16, color: "#6c757d" }}>
-            No tienes grupos actualmente
-          </Text>
+          <Text style={{ fontSize: 16, color: "#6c757d" }}>No tienes grupos actualmente</Text>
         </View>
       )}
+
+      {showAddGroup && <AddGroupModal visible={showAddGroup} onClose={() => setShowAddGroup(false)} />}
     </View>
   );
 };

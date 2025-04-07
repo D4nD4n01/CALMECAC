@@ -1,162 +1,116 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  Platform,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import logo from "../../assets/images/logo.jpg";
 
-// Importar la imagen del logo
-import logo from "../../assets/images/logo.jpg";  // Asegúrate de que la ruta sea correcta
-
-const Login = ({ }) => {
+const Login = () => {
   const navigation = useNavigation();
-  const [usuario, setUsuario] = useState("");  // Guardar el correo
-  const [password, setPassword] = useState("");  // Guardar la contraseña
-
+  const [usuario, setUsuario] = useState("");
+  const [password, setPassword] = useState("");
 
   const acount = [
-    { user: "Memin@gmail.com", pass: "Memin" },
-    { user: "Arandez@gmail.com", pass: "Arancel" },
-    { user: "Pulido@gmail.com", pass: "qtal" },
-    { user: "Roberto", pass: "123" },
+    { userID: 1, user: "Memin", pass: "Memin" },
+    { userID: 2, user: "Arandez", pass: "Arancel" },
+    { userID: 3, user: "Pulido", pass: "qtal" },
+    { userID: 4, user: "prueba", pass: "123" },
   ];
 
-  const ingresar = () => {
-    // Validar si las credenciales coinciden con alguna cuenta
+  const guardarUserID = async (id) => {
+    try {
+      if (Platform.OS === "web") {
+        localStorage.setItem("userID", id.toString());
+      } else {
+        await AsyncStorage.setItem("userID", id.toString());
+      }
+    } catch (error) {
+      console.error("Error guardando userID:", error);
+    }
+  };
+
+  const obtenerUserID = async () => {
+    try {
+      if (Platform.OS === "web") {
+        return localStorage.getItem("userID");
+      } else {
+        return await AsyncStorage.getItem("userID");
+      }
+    } catch (error) {
+      console.error("Error obteniendo userID:", error);
+    }
+  };
+
+  useEffect(() => {
+    const verificarSesion = async () => {
+      const userID = await obtenerUserID();
+      if (userID) {
+        navigation.replace("MyGroups"); // Reemplazar para no regresar a login
+      }
+    };
+
+    verificarSesion();
+  }, []);
+
+  const ingresar = async () => {
     const validUser = acount.find(
       (account) => account.user === usuario && account.pass === password
     );
 
     if (validUser) {
-      setUsuario("")
-      setPassword("")
-      navigation.navigate("MyGroups");
+      await guardarUserID(validUser.userID);
+      setUsuario("");
+      setPassword("");
+      navigation.replace("MyGroups");
     } else {
       alert("Usuario o contraseña incorrectos.");
     }
   };
 
-  const pasarPantalla = () =>{
-
-  }
-
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor:"#E3F2FD", // Morado claro en web, azul claro en móvil
-        justifyContent: "center",
-        alignItems: "center",
-        padding:0,
-      }}
-    >
-      {/* Logo */}
-      <View
-        style={{
-          backgroundColor:"#2196F3", // Morado oscuro en web, azul en móvil
-          width: "100%",
-          alignItems: "center",
-          paddingVertical: 30,
-        }}
-      >
-        {/* Agregar la imagen del logo */}
-        <Image
-          source={logo}  // Usa la variable `logo` que importaste
-          style={{
-            width: 80,
-            height: 80,
-            borderRadius: 40,
-            backgroundColor: "gray",  // Si no tienes la imagen disponible, un color de fondo para el círculo
-          }}
-        />
+    <View style={{ flex: 1, backgroundColor: "#E3F2FD", justifyContent: "center", alignItems: "center" }}>
+      <View style={{ backgroundColor: "#2196F3", width: "100%", alignItems: "center", paddingVertical: 30 }}>
+        <Image source={logo} style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: "gray" }} />
       </View>
 
-      {/* Contenedor del formulario */}
-      <View
-        style={{
-          backgroundColor: "white",
-          width:"85%",
-          padding: 20,
-          borderRadius: 10,
-          shadowColor: "#000",
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.1,
-          shadowRadius: 5,
-          elevation: 5,
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: "bold",
-            textAlign: "center",
-            marginBottom: 20,
-            color:"#0D47A1",
-          }}
-        >
+      <View style={{ backgroundColor: "white", width: "85%", padding: 20, borderRadius: 10, elevation: 5 }}>
+        <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", marginBottom: 20, color: "#0D47A1" }}>
           Inicio de Sesión
         </Text>
 
         <TextInput
-          style={{
-            width: "100%",
-            height: 40,
-            borderWidth: 1,
-            borderColor: "#ccc",
-            borderRadius: 5,
-            paddingHorizontal: 10,
-            marginBottom: 15,
-          }}
+          style={{ height: 40, borderWidth: 1, borderColor: "#ccc", borderRadius: 5, paddingHorizontal: 10, marginBottom: 15 }}
           placeholder="Ingrese su correo"
           placeholderTextColor="#666"
           value={usuario}
-          onChangeText={setUsuario}  // Actualiza el estado del correo
+          onChangeText={setUsuario}
         />
 
         <TextInput
-          style={{
-            width: "100%",
-            height: 40,
-            borderWidth: 1,
-            borderColor: "#ccc",
-            borderRadius: 5,
-            paddingHorizontal: 10,
-            marginBottom: 15,
-          }}
+          style={{ height: 40, borderWidth: 1, borderColor: "#ccc", borderRadius: 5, paddingHorizontal: 10, marginBottom: 15 }}
           placeholder="Ingrese su contraseña"
           secureTextEntry
           placeholderTextColor="#666"
           value={password}
-          onChangeText={setPassword}  // Actualiza el estado de la contraseña
+          onChangeText={setPassword}
         />
 
         <TouchableOpacity
-          style={{
-            backgroundColor:"#0D47A1",
-            paddingVertical: 10,
-            borderRadius: 5,
-            alignItems: "center",
-          }}
-          onPress={ingresar}  // Llama a la función ingresar al presionar el botón
+          style={{ backgroundColor: "#0D47A1", paddingVertical: 10, borderRadius: 5, alignItems: "center" }}
+          onPress={ingresar}
         >
-          <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
-            Acceder
-          </Text>
+          <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>Acceder</Text>
         </TouchableOpacity>
 
-        <Text
-          style={{
-            textAlign: "center",
-            marginTop: 10,
-            fontSize: 14,
-            color: "black",
-          }}
-        >
+        <Text style={{ textAlign: "center", marginTop: 10, fontSize: 14, color: "black" }}>
           ¿No tienes cuenta?{" "}
-          <Text
-            style={{
-              color:"#0D47A1",
-              fontWeight: "bold",
-            }}
-            onPress={() => navigation.navigate("Register")}
-          >
+          <Text style={{ color: "#0D47A1", fontWeight: "bold" }} onPress={() => navigation.navigate("Register")}>
             Regístrate
           </Text>
         </Text>
