@@ -4,7 +4,7 @@ import logo from "../../assets/images/logo.jpg"; // Asegúrate de que esta ruta 
 import { Platform } from "react-native";
 
 
-const Consult = ({ navigation }) => {
+const Consult = ({navigation }) => {
 
   const [numeroControl, setNumeroControl] = useState("");
   const [resultados, setResultados] = useState([]);
@@ -126,25 +126,16 @@ const Consult = ({ navigation }) => {
       idAlumno: 17,
       numeroControl: 21070319,
       grado: 9,
-      escuela: 2  // Repetido número de control en una escuela diferente
+      escuela: 2  
     },
     {
-      idAlumno: 18,
-      numeroControl: 24080336,
-      grado: 6,
-      escuela: 5
+      idAlumno: 18,numeroControl: 24080336,grado: 6, escuela: 5
     },
     {
-      idAlumno: 19,
-      numeroControl: 23070337,
-      grado: 10,
-      escuela: 3
+      idAlumno: 19,numeroControl: 23070337,grado: 10,escuela: 3
     },
     {
-      idAlumno: 20,
-      numeroControl: 21070319,
-      grado: 5,
-      escuela: 6  // Repetido número de control en una escuela diferente
+      idAlumno: 20,numeroControl: 21070319,grado: 5,escuela: 6  
     }
   ];
 
