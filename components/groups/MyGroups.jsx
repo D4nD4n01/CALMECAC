@@ -52,9 +52,10 @@ const MyGroups = () => {
         const filtrados = gruposData
           .filter((g) => g.IdProfesor === parseInt(id))
           .map((g) => ({
-            nombre: `Grupo ${g.IdGroup} - Grado ${g.Groups.IntGrado}`,
+            nombre: `Grado ${g.Groups.IntGrado}`,
             salon: g.Groups.StrSalon,
             hora: g.Groups.StrHour,
+            idGroup: g.IdGroup
           }));
         setGroups(filtrados);
       }
@@ -83,7 +84,7 @@ const MyGroups = () => {
 
       {groups && groups.length > 0 ? (
         groups.map((group, index) => (
-          <Group key={index} nombre={group.nombre} salon={group.salon} hora={group.hora} />
+          <Group key={index} nombre={group.nombre} salon={group.salon} hora={group.hora} idGrupo={group.idGrupo} />
         ))
       ) : (
         <View style={{ marginTop: 50, alignItems: "center" }}>

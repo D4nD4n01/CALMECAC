@@ -17,6 +17,7 @@ const Login = () => {
   const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isWeb,setIsWeb] = useState(Platform.OS === "web"?true:false)
 
   const acount = [
     { userID: 1, user: "Memin", pass: "Memin" },
@@ -90,12 +91,11 @@ const Login = () => {
   return (
     <View style={{ flex: 1, backgroundColor: "#E3F2FD", justifyContent: "center", alignItems: "center" }}>
 
-      
-      <View style={{ backgroundColor: "#2196F3", width: "100%", alignItems: "center", paddingVertical: 30 }}>
+      <View style={{ backgroundColor: "#2196F3", width: "100%", alignItems: "center", paddingVertical: 10 }}>
         <Image source={logo} style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: "gray" }} />
       </View>
 
-      <View style={{ backgroundColor: "white", width: "85%", padding: 20, borderRadius: 10, elevation: 5 }}>
+      <View style={{ backgroundColor: "white", width:isWeb?"60%" : "85%", padding: 20, borderRadius: 10, elevation: 5 }}>
         <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", marginBottom: 20, color: "#0D47A1" }}>
           Inicio de Sesión
         </Text>
