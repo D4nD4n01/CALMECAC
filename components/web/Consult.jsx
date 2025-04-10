@@ -4,7 +4,7 @@ import logo from "../../assets/images/logo.jpg"; // Asegúrate de que esta ruta 
 import { Platform } from "react-native";
 
 
-const Consult = ({navigation }) => {
+const Consult = ({ navigation }) => {
 
   const [numeroControl, setNumeroControl] = useState("");
   const [resultados, setResultados] = useState([]);
@@ -126,16 +126,16 @@ const Consult = ({navigation }) => {
       idAlumno: 17,
       numeroControl: 21070319,
       grado: 9,
-      escuela: 2  
+      escuela: 2
     },
     {
-      idAlumno: 18,numeroControl: 24080336,grado: 6, escuela: 5
+      idAlumno: 18, numeroControl: 24080336, grado: 6, escuela: 5
     },
     {
-      idAlumno: 19,numeroControl: 23070337,grado: 10,escuela: 3
+      idAlumno: 19, numeroControl: 23070337, grado: 10, escuela: 3
     },
     {
-      idAlumno: 20,numeroControl: 21070319,grado: 5,escuela: 6  
+      idAlumno: 20, numeroControl: 21070319, grado: 5, escuela: 6
     }
   ];
 
@@ -143,7 +143,7 @@ const Consult = ({navigation }) => {
     <View
       style={{
         flex: 1,
-        backgroundColor: "#E3F2FD",
+        backgroundColor: "#FFF5F5", // Fondo suave
         alignItems: "center",
         paddingTop: 40,
         paddingHorizontal: 20,
@@ -155,16 +155,14 @@ const Consult = ({navigation }) => {
           position: "absolute",
           top: 20,
           left: 20,
-          backgroundColor: "#0D47A1",
+          backgroundColor: "#8B0000", // Rojo Morena oscuro
           paddingVertical: 8,
           paddingHorizontal: 16,
           borderRadius: 5,
         }}
         onPress={() => navigation.navigate("Login")}
       >
-        <Text style={{ color: "white", fontWeight: "bold" }}>
-          Iniciar sesión
-        </Text>
+        <Text style={{ color: "white", fontWeight: "bold" }}>Iniciar sesión</Text>
       </TouchableOpacity>
 
       {/* Logo */}
@@ -180,7 +178,7 @@ const Consult = ({navigation }) => {
       />
 
       {/* Título */}
-      <Text style={{ fontSize: 20, color: "#0D47A1", marginBottom: 20 }}>
+      <Text style={{ fontSize: 20, color: "#6B0000", marginBottom: 20 }}>
         Ingrese su número de control
       </Text>
 
@@ -189,10 +187,10 @@ const Consult = ({navigation }) => {
         placeholder="Número de control"
         value={numeroControl}
         onChangeText={handleInputChange}
-        keyboardType="numeric" // Para mostrar solo el teclado numérico en móviles
+        keyboardType="numeric"
         style={{
           width: "100%",
-          borderColor: "#2196F3",
+          borderColor: "#A52A2A", // Marrón rojizo
           borderWidth: 2,
           borderRadius: 10,
           padding: 10,
@@ -209,33 +207,33 @@ const Consult = ({navigation }) => {
             width: "100%",
             flexDirection: "row",
             flexWrap: "wrap",
-            justifyContent: "space-between", // Para distribuirlos
+            justifyContent: "space-between",
           }}
         >
           {resultados.map((item, index) => (
             <View
               key={index}
               style={{
-                backgroundColor: "#BBDEFB",
+                backgroundColor: "#FDEDEC", // Color suave rosado
                 padding: 10,
                 borderRadius: 10,
                 marginVertical: 5,
-                borderColor: "#2196F3",
+                borderColor: "#8B0000",
                 borderWidth: 2,
-                width: "48%",  // Hace que cada tarjeta ocupe el 48% del ancho
+                width: "48%",
                 marginBottom: 10,
               }}
             >
-              <Text style={{ fontSize: 16, color: "#0D47A1" }}>
+              <Text style={{ fontSize: 16, color: "#6B0000" }}>
                 Alumno ID: {item.idAlumno}
               </Text>
-              <Text style={{ fontSize: 14, color: "#0D47A1" }}>
+              <Text style={{ fontSize: 14, color: "#6B0000" }}>
                 Número de Control: {item.numeroControl}
               </Text>
-              <Text style={{ fontSize: 14, color: "#0D47A1" }}>
+              <Text style={{ fontSize: 14, color: "#6B0000" }}>
                 Grado: {item.grado}
               </Text>
-              <Text style={{ fontSize: 14, color: "#0D47A1" }}>
+              <Text style={{ fontSize: 14, color: "#6B0000" }}>
                 Escuela: {item.escuela}
               </Text>
             </View>
@@ -243,6 +241,7 @@ const Consult = ({navigation }) => {
         </ScrollView>
       )}
     </View>
+
   );
 };
 

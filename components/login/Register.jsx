@@ -3,19 +3,19 @@ import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 
-const Register = ({}) => {
+const Register = ({ }) => {
 
   const navigation = useNavigation();
 
-  const reedirigir = () =>{
+  const reedirigir = () => {
     navigation.replace("Login");
   }
-  
+
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: "#E3F2FD",
+        backgroundColor: "#FBE9E7", // fondo general beige rosado
         justifyContent: "center",
         alignItems: "center",
         padding: 0,
@@ -23,7 +23,7 @@ const Register = ({}) => {
     >
       <View
         style={{
-          backgroundColor:"#2196F3",
+          backgroundColor: "#A52A2A", // encabezado marrón rojizo
           width: "100%",
           alignItems: "center",
           paddingVertical: 30,
@@ -37,7 +37,7 @@ const Register = ({}) => {
       <View
         style={{
           backgroundColor: "white",
-          width:"85%",
+          width: "85%",
           padding: 20,
           borderRadius: 10,
           shadowColor: "#000",
@@ -53,7 +53,7 @@ const Register = ({}) => {
             fontWeight: "bold",
             textAlign: "center",
             marginBottom: 20,
-            color:"#0D47A1",
+            color: "#7B1B1B", // título rojo oscuro
           }}
         >
           Crear Cuenta
@@ -104,7 +104,7 @@ const Register = ({}) => {
 
         <TouchableOpacity
           style={{
-            backgroundColor:"#0D47A1",
+            backgroundColor: "#8B0000", // botón rojo sangre
             paddingVertical: 10,
             borderRadius: 5,
             alignItems: "center",
@@ -118,6 +118,7 @@ const Register = ({}) => {
       </View>
     </View>
   );
+
 };
 
 export default Register;

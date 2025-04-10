@@ -5,9 +5,7 @@ const BuscarAlumno = ({ route }) => {
   const { estudiantes } = route.params;
   const [busqueda, setBusqueda] = useState("");
 
-  const filtrados = estudiantes.filter(est =>
-    est.StrNombre.toLowerCase().includes(busqueda.toLowerCase())
-  );
+
 
   return (
     <View style={styles.container}>
@@ -19,7 +17,7 @@ const BuscarAlumno = ({ route }) => {
         onChangeText={setBusqueda}
       />
       <FlatList
-        data={filtrados}
+        data={estudiantes}
         keyExtractor={(item) => item.idEstudiante.toString()}
         renderItem={({ item }) => (
           <Text style={styles.item}>{item.intNumeroLista}. {item.StrNombre}</Text>

@@ -55,46 +55,82 @@ const MyGroups = () => {
             nombre: `Grado ${g.Groups.IntGrado}`,
             salon: g.Groups.StrSalon,
             hora: g.Groups.StrHour,
-            idGroup: g.IdGroup
+            IdGroup: g.IdGroup
           }));
         setGroups(filtrados);
       }
     };
-
     filtrarGrupos();
   }, []);
 
   return (
-    <View style={{ flex: 1, padding: 16, backgroundColor: "#E3F2FD" }}>
-      <View style={{ backgroundColor: "#2196F3", paddingVertical: 16, paddingHorizontal: 24, borderRadius: 10, marginBottom: 16, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-        <Text style={{ fontSize: 24, fontWeight: "bold", color: "white" }}>Mis Grupos</Text>
+    <View style={{ flex: 1, padding: 16, backgroundColor: "#FBE9E7" }}>
+      <View
+        style={{
+          backgroundColor: "#8B0000", // encabezado rojo sangre
+          paddingVertical: 16,
+          paddingHorizontal: 24,
+          borderRadius: 10,
+          marginBottom: 16,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Text style={{ fontSize: 24, fontWeight: "bold", color: "white" }}>
+          Mis Grupos
+        </Text>
         <TouchableOpacity onPress={cerrarSesion}>
-          <Text style={{ color: "white", fontWeight: "bold", fontSize: 14 }}>Cerrar sesión</Text>
+          <Text
+            style={{
+              color: "white",
+              fontWeight: "bold",
+              fontSize: 14,
+            }}
+          >
+            Cerrar sesión
+          </Text>
         </TouchableOpacity>
       </View>
-
+  
       <View style={{ marginBottom: 32, alignItems: "center" }}>
         <TouchableOpacity
           onPress={() => setShowAddGroup(true)}
-          style={{ backgroundColor: "#0D47A1", paddingVertical: 12, paddingHorizontal: 24, borderRadius: 5 }}
+          style={{
+            backgroundColor: "#A52A2A", // botón rojo morena
+            paddingVertical: 12,
+            paddingHorizontal: 24,
+            borderRadius: 5,
+          }}
         >
-          <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>Agregar grupo</Text>
+          <Text
+            style={{
+              color: "white",
+              fontSize: 16,
+              fontWeight: "bold",
+            }}
+          >
+            Agregar grupo
+          </Text>
         </TouchableOpacity>
       </View>
-
+  
       {groups && groups.length > 0 ? (
-        groups.map((group, index) => (
-          <Group key={index} nombre={group.nombre} salon={group.salon} hora={group.hora} idGrupo={group.idGrupo} />
-        ))
+        groups.map((group, index) => <Group key={index} data={group} />)
       ) : (
         <View style={{ marginTop: 50, alignItems: "center" }}>
-          <Text style={{ fontSize: 16, color: "#6c757d" }}>No tienes grupos actualmente</Text>
+          <Text style={{ fontSize: 16, color: "#6c757d" }}>
+            No tienes grupos actualmente
+          </Text>
         </View>
       )}
-
-      {showAddGroup && <AddGroupModal visible={showAddGroup} onClose={() => setShowAddGroup(false)} />}
+  
+      {showAddGroup && (
+        <AddGroupModal visible={showAddGroup} onClose={() => setShowAddGroup(false)} />
+      )}
     </View>
   );
+  
 };
 
 export default MyGroups;

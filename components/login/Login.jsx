@@ -17,7 +17,7 @@ const Login = () => {
   const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isWeb,setIsWeb] = useState(Platform.OS === "web"?true:false)
+  const [isWeb, setIsWeb] = useState(Platform.OS === "web" ? true : false)
 
   const acount = [
     { userID: 1, user: "Memin", pass: "Memin" },
@@ -89,19 +89,63 @@ const Login = () => {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#E3F2FD", justifyContent: "center", alignItems: "center" }}>
-
-      <View style={{ backgroundColor: "#2196F3", width: "100%", alignItems: "center", paddingVertical: 10 }}>
-        <Image source={logo} style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: "gray" }} />
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "#FBE9E7", // fondo general beige rosado
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <View
+        style={{
+          backgroundColor: "#A52A2A", // encabezado marrón rojizo
+          width: "100%",
+          alignItems: "center",
+          paddingVertical: 10,
+        }}
+      >
+        <Image
+          source={logo}
+          style={{
+            width: 80,
+            height: 80,
+            borderRadius: 40,
+            backgroundColor: "gray",
+          }}
+        />
       </View>
 
-      <View style={{ backgroundColor: "white", width:isWeb?"60%" : "85%", padding: 20, borderRadius: 10, elevation: 5 }}>
-        <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", marginBottom: 20, color: "#0D47A1" }}>
+      <View
+        style={{
+          backgroundColor: "white",
+          width: isWeb ? "60%" : "85%",
+          padding: 20,
+          borderRadius: 10,
+          elevation: 5,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: "bold",
+            textAlign: "center",
+            marginBottom: 20,
+            color: "#7B1B1B", // título rojo oscuro
+          }}
+        >
           Inicio de Sesión
         </Text>
 
         <TextInput
-          style={{ height: 40, borderWidth: 1, borderColor: "#ccc", borderRadius: 5, paddingHorizontal: 10, marginBottom: 15 }}
+          style={{
+            height: 40,
+            borderWidth: 1,
+            borderColor: "#ccc",
+            borderRadius: 5,
+            paddingHorizontal: 10,
+            marginBottom: 15,
+          }}
           placeholder="Ingrese su correo"
           placeholderTextColor="#666"
           value={usuario}
@@ -109,7 +153,14 @@ const Login = () => {
         />
 
         <TextInput
-          style={{ height: 40, borderWidth: 1, borderColor: "#ccc", borderRadius: 5, paddingHorizontal: 10, marginBottom: 15 }}
+          style={{
+            height: 40,
+            borderWidth: 1,
+            borderColor: "#ccc",
+            borderRadius: 5,
+            paddingHorizontal: 10,
+            marginBottom: 15,
+          }}
           placeholder="Ingrese su contraseña"
           secureTextEntry
           placeholderTextColor="#666"
@@ -118,21 +169,39 @@ const Login = () => {
         />
 
         <TouchableOpacity
-          style={{ backgroundColor: "#0D47A1", paddingVertical: 10, borderRadius: 5, alignItems: "center" }}
+          style={{
+            backgroundColor: "#8B0000", // botón rojo sangre
+            paddingVertical: 10,
+            borderRadius: 5,
+            alignItems: "center",
+          }}
           onPress={ingresar}
         >
-          <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>Acceder</Text>
+          <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
+            Acceder
+          </Text>
         </TouchableOpacity>
 
-        <Text style={{ textAlign: "center", marginTop: 10, fontSize: 14, color: "black" }}>
+        <Text
+          style={{
+            textAlign: "center",
+            marginTop: 10,
+            fontSize: 14,
+            color: "#333",
+          }}
+        >
           ¿No tienes cuenta?{" "}
-          <Text style={{ color: "#0D47A1", fontWeight: "bold" }} onPress={() => navigation.navigate("Register")}>
+          <Text
+            style={{ color: "#A52A2A", fontWeight: "bold" }} // enlace color morena
+            onPress={() => navigation.navigate("Register")}
+          >
             Regístrate
           </Text>
         </Text>
       </View>
     </View>
   );
+
 };
 
 export default Login;
