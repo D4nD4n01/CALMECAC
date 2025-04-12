@@ -1,87 +1,117 @@
 // src/groups/AddGroupModal.jsx
 import React from "react";
-import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Platform } from "react-native";
+import { Modal, View, Text, TextInput, TouchableOpacity, Platform } from "react-native";
 
 const isWeb = Platform.OS === "web";
 
 const AddGroupModal = ({ visible, onClose }) => {
   return (
     <Modal transparent visible={visible} animationType="slide">
-      <View style={styles.overlay}>
-        <View style={styles.modalContainer}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "rgba(0,0,0,0.4)",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            width: isWeb ? "40%" : "80%",
+            backgroundColor: "#FFF5F5", // Fondo claro
+            borderRadius: 10,
+            padding: 20,
+            elevation: 5,
+            position: "relative",
+          }}
+        >
           {/* Botón cerrar */}
-          <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-            <Text style={styles.closeText}>X</Text>
+          <TouchableOpacity
+            onPress={onClose}
+            style={{
+              position: "absolute",
+              top: 10,
+              right: 10,
+              zIndex: 10,
+              backgroundColor: "#8B0000",
+              borderRadius: 20,
+              width: 30,
+              height: 30,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ fontSize: 16, color: "#fff", fontWeight: "bold" }}>X</Text>
           </TouchableOpacity>
 
-          <Text style={styles.modalTitle}>Añadir nuevo grupo</Text>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              color: "#6B0000",
+              marginBottom: 20,
+              textAlign: "center",
+            }}
+          >
+            Añadir nuevo grupo
+          </Text>
 
-          <TextInput style={styles.input} placeholder="Grado (ej. 1, 2, 3)" keyboardType="numeric" />
-          <TextInput style={styles.input} placeholder="Horario (ej. 9:00-10:00)" />
-          <TextInput style={styles.input} placeholder="Salón (ej. FF1)" />
+          <TextInput
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: 8,
+              paddingHorizontal: 10,
+              paddingVertical: 8,
+              borderWidth: 1,
+              borderColor: "#A52A2A",
+              marginBottom: 15,
+            }}
+            placeholder="Grado (ej. 1, 2, 3)"
+            keyboardType="numeric"
+          />
 
-          <TouchableOpacity style={styles.saveButton}>
-            <Text style={styles.saveButtonText}>Guardar</Text>
+          <TextInput
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: 8,
+              paddingHorizontal: 10,
+              paddingVertical: 8,
+              borderWidth: 1,
+              borderColor: "#A52A2A",
+              marginBottom: 15,
+            }}
+            placeholder="Horario (ej. 9:00-10:00)"
+          />
+
+          <TextInput
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: 8,
+              paddingHorizontal: 10,
+              paddingVertical: 8,
+              borderWidth: 1,
+              borderColor: "#A52A2A",
+              marginBottom: 20,
+            }}
+            placeholder="Salón (ej. FF1)"
+          />
+
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#8B0000",
+              padding: 12,
+              borderRadius: 8,
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }}>
+              Guardar
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.4)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalContainer: {
-    width: isWeb ?"40%" : "80%",  
-    backgroundColor: "#E3F2FD",
-    borderRadius: 10,
-    padding: 20,
-    elevation: 5,
-    position: "relative",
-  },
-  closeButton: {
-    position: "absolute",
-    top: 10,
-    right: 10,
-    zIndex: 10,
-  },
-  closeText: {
-    fontSize: 18,
-    color: "#0D47A1",
-    fontWeight: "bold",
-  },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#0D47A1",
-    marginBottom: 20,
-    textAlign: "center",
-  },
-  input: {
-    backgroundColor: "#fff",
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 1,
-    borderColor: "#2196F3",
-    marginBottom: 15,
-  },
-  saveButton: {
-    backgroundColor: "#0D47A1",
-    padding: 12,
-    borderRadius: 8,
-    alignItems: "center",
-  },
-  saveButtonText: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-});
 
 export default AddGroupModal;
