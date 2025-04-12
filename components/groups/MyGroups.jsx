@@ -92,7 +92,7 @@ const MyGroups = () => {
           </Text>
         </TouchableOpacity>
       </View>
-  
+
       <View style={{ marginBottom: 32, alignItems: "center" }}>
         <TouchableOpacity
           onPress={() => setShowAddGroup(true)}
@@ -114,7 +114,7 @@ const MyGroups = () => {
           </Text>
         </TouchableOpacity>
       </View>
-  
+
       {groups && groups.length > 0 ? (
         groups.map((group, index) => <Group key={index} data={group} />)
       ) : (
@@ -124,13 +124,13 @@ const MyGroups = () => {
           </Text>
         </View>
       )}
-  
+
       {showAddGroup && (
         <AddGroupModal visible={showAddGroup} onClose={() => setShowAddGroup(false)} />
       )}
     </View>
   );
-  
+
 };
 
 export default MyGroups;
