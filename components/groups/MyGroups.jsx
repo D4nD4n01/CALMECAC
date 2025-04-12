@@ -12,16 +12,16 @@ const MyGroups = () => {
   const [showAddGroup, setShowAddGroup] = useState(false);
 
   const gruposData = [
-    { IdProfesor: 1, IdGroup: 1, Groups: { IntGrado: 3, StrHour: "9:00-10:00", StrSalon: "FFA" } },
-    { IdProfesor: 1, IdGroup: 2, Groups: { IntGrado: 2, StrHour: "10:00-11:00", StrSalon: "FF1" } },
-    { IdProfesor: 1, IdGroup: 3, Groups: { IntGrado: 1, StrHour: "8:00-9:00", StrSalon: "FF9" } },
-    { IdProfesor: 2, IdGroup: 4, Groups: { IntGrado: 3, StrHour: "11:00-12:00", StrSalon: "FFE" } },
-    { IdProfesor: 2, IdGroup: 5, Groups: { IntGrado: 2, StrHour: "7:00-8:00", StrSalon: "FFA" } },
-    { IdProfesor: 3, IdGroup: 6, Groups: { IntGrado: 1, StrHour: "12:00-13:00", StrSalon: "FF9" } },
-    { IdProfesor: 3, IdGroup: 7, Groups: { IntGrado: 2, StrHour: "13:00-14:00", StrSalon: "FF1" } },
-    { IdProfesor: 3, IdGroup: 8, Groups: { IntGrado: 3, StrHour: "14:00-15:00", StrSalon: "FFE" } },
-    { IdProfesor: 1, IdGroup: 9, Groups: { IntGrado: 2, StrHour: "15:00-16:00", StrSalon: "FF1" } },
-    { IdProfesor: 2, IdGroup: 10, Groups: { IntGrado: 1, StrHour: "16:00-17:00", StrSalon: "FF9" } },
+    { IdProfesor: 1, IdGroup: 1, Groups: { IntGrado: 3, StrHour: "9:00-10:00", StrSalon: "FFA", Materia: "Quimica" } },
+    { IdProfesor: 1, IdGroup: 2, Groups: { IntGrado: 2, StrHour: "10:00-11:00", StrSalon: "FF1", Materia: "Fisica" } },
+    { IdProfesor: 1, IdGroup: 3, Groups: { IntGrado: 1, StrHour: "8:00-9:00", StrSalon: "FF9", Materia: "Ciencias Naturales" } },
+    { IdProfesor: 2, IdGroup: 4, Groups: { IntGrado: 3, StrHour: "11:00-12:00", StrSalon: "FFE", Materia: "Historia" } },
+    { IdProfesor: 2, IdGroup: 5, Groups: { IntGrado: 2, StrHour: "7:00-8:00", StrSalon: "FFA", Materia: "Geografia" } },
+    { IdProfesor: 3, IdGroup: 6, Groups: { IntGrado: 1, StrHour: "12:00-13:00", StrSalon: "FF9", Materia: "Matematicas" } },
+    { IdProfesor: 3, IdGroup: 7, Groups: { IntGrado: 2, StrHour: "13:00-14:00", StrSalon: "FF1", Materia: "Matematicas 2" } },
+    { IdProfesor: 3, IdGroup: 8, Groups: { IntGrado: 3, StrHour: "14:00-15:00", StrSalon: "FFE", Materia: "Algebra Lineal" } },
+    { IdProfesor: 1, IdGroup: 9, Groups: { IntGrado: 2, StrHour: "15:00-16:00", StrSalon: "FF1", Materia: "Biología" } },
+    { IdProfesor: 2, IdGroup: 10, Groups: { IntGrado: 1, StrHour: "16:00-17:00", StrSalon: "FF9", Materia: "Civica y Etica" } },
   ];
 
   const obtenerUserID = async () => {
@@ -55,7 +55,8 @@ const MyGroups = () => {
             nombre: `Grado ${g.Groups.IntGrado}`,
             salon: g.Groups.StrSalon,
             hora: g.Groups.StrHour,
-            IdGroup: g.IdGroup
+            IdGroup: g.IdGroup,
+            Materia: g.Groups.Materia
           }));
         setGroups(filtrados);
       }
