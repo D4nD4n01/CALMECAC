@@ -2,59 +2,73 @@ import React from "react";
 import {
   View,
   Text,
-  FlatList,
   TouchableOpacity,
 } from "react-native";
 
+import AsistenciaPasoAPaso from "./AsistenciaPasoAPaso";
+
 const ListaAsistencia = ({ route, navigation }) => {
-  const { estudiantes } = route.params;
-
-  const abrirAsistenciaTradicional = () => {
-    navigation.navigate("AsistenciaPasoAPaso", { alumnos: estudiantes });
-  };
-
   const abrirLectorQR = () => {
     console.log("Abrir lector QR próximamente...");
   };
 
   return (
-    <View style={{ padding: 20, flex: 1 }}>
-      <Text style={{
-        fontSize: 20,
-        fontWeight: "bold",
-        marginBottom: 15,
-        color: "#4E342E"
+    <View style={{ flex: 1, backgroundColor: "#FFF5F5" }}>
+
+      {/* Cabecera */}
+      <View style={{
+        backgroundColor: "#6B0000",
+        paddingVertical: 20,
+        alignItems: "center",
+        justifyContent: "center",
+        elevation: 4,
       }}>
-        Lista de Asistencia
-      </Text>
+        <Text style={{
+          color: "#fff",
+          fontSize: 24,
+          fontWeight: "bold",
+        }}>
+          Asistencia
+        </Text>
 
-      <FlatList
-        data={estudiantes}
-        keyExtractor={(item) => item.idEstudiante.toString()}
-        renderItem={({ item }) => (
+        <TouchableOpacity
+          onPress={() => navigation.navigate("MenuGroup")}
+          style={{
+            position: "absolute",
+            top: 20,
+            right: 20,
+            backgroundColor: "#6B0000",
+            padding: 5,
+            borderRadius: 10,
+            zIndex: 10,
+          }}
+        >
           <Text style={{
-            fontSize: 16,
-            marginVertical: 4,
-            color: "#5D4037"
-          }}>
-            {item.intNumeroLista}. {item.StrNombre}
-          </Text>
-        )}
-      />
+            color: "#FBE9E7",
+            fontWeight: "bold",
+            fontSize: 18,
+          }}>X</Text>
+        </TouchableOpacity>
+      </View>
 
+      {/* Componente paso a paso */}
+      <AsistenciaPasoAPaso navigation={navigation} />
+
+      {/* Botón lector QR */}
       <View style={{
         flexDirection: "row",
-        justifyContent: "space-around",
+        justifyContent: "center",
         marginTop: 30,
+        paddingHorizontal: 20,
       }}>
         <TouchableOpacity
+          onPress={abrirLectorQR}
           style={{
-            backgroundColor: "#8B0000", // rojo vino
+            backgroundColor: "#8B0000",
             paddingVertical: 12,
             paddingHorizontal: 20,
             borderRadius: 8,
           }}
-          onPress={abrirLectorQR}
         >
           <Text style={{
             color: "#fff",
@@ -62,24 +76,6 @@ const ListaAsistencia = ({ route, navigation }) => {
             fontSize: 16,
           }}>
             Con QR
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={{
-            backgroundColor: "#4E342E", // marrón oscuro
-            paddingVertical: 12,
-            paddingHorizontal: 20,
-            borderRadius: 8,
-          }}
-          onPress={abrirAsistenciaTradicional}
-        >
-          <Text style={{
-            color: "#fff",
-            fontWeight: "bold",
-            fontSize: 16,
-          }}>
-            Tradicional
           </Text>
         </TouchableOpacity>
       </View>

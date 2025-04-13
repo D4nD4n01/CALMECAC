@@ -64,31 +64,10 @@ const MenuGroup = ({ navigation }) => {
   return (
     <View style={{ flex: 1, backgroundColor: "#FFF5F5", padding: 20 }}>
       {/* Botón para salir */}
-      <TouchableOpacity
-        onPress={salirDelGrupo}
-        style={{
-          position: "absolute",
-          top: 20,
-          left: 20,
-          backgroundColor: "#FFFFFF", // fondo blanco para contraste
-          borderRadius: 30,
-          padding: 0,
-          shadowColor: "#000",
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.01,
-          shadowRadius: .1,
-          elevation: 1,
-          zIndex: 10
-        }}
-      >
-        <Ionicons name="arrow-back-circle" size={40} color="#800000" />
-        {/* color morena más fuerte para que destaque */}
-      </TouchableOpacity>
-
 
       <View
         style={{
-          backgroundColor: "#8B0000",
+          backgroundColor: "#6B0000",
           paddingVertical: 20,
           paddingHorizontal: 15,
           borderRadius: 10,
@@ -104,6 +83,26 @@ const MenuGroup = ({ navigation }) => {
         <Text style={{ fontSize: 22, fontWeight: "bold", color: "white" }}>
           Grupo: {groupId}
         </Text>
+
+        <TouchableOpacity
+          onPress={salirDelGrupo}
+          style={{
+            position: "absolute",
+            top: 18,
+            right: 20,
+            backgroundColor: "#6B0000",
+            borderRadius: 10,
+            padding: 5,
+            zIndex: 10
+          }}
+        >
+          <Text style={{
+            color: "#FBE9E7",
+            fontWeight: "bold",
+            fontSize: 18,
+          }}>X</Text>
+          {/* color morena más fuerte para que destaque */}
+        </TouchableOpacity>
       </View>
 
       <View

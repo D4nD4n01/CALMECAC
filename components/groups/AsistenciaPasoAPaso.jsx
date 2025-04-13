@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  AsyncStorage,
-  Platform,
-} from "react-native";
+import { View, Text, TouchableOpacity, Platform, StyleSheet } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const isWeb = Platform.OS === "web";
 
@@ -156,12 +150,7 @@ const AsistenciaPasoAPaso = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {/* Botón cerrar */}
-      <TouchableOpacity
-        onPress={() => navigation.navigate("MenuGroup")}
-        style={styles.closeButton}
-      >
-        <Text style={styles.closeButtonText}>X</Text>
-      </TouchableOpacity>
+      
 
       <View style={styles.card}>
         <Text style={styles.nombre}>
@@ -195,20 +184,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-  },
-  closeButton: {
-    position: "absolute",
-    top: isWeb ? 20 : 40,
-    right: 20,
-    backgroundColor: "#6B0000",
-    padding: 8,
-    borderRadius: 20,
-    zIndex: 10,
-  },
-  closeButtonText: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 14,
   },
   card: {
     width: isWeb ? "50%" : "90%",
