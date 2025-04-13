@@ -14,7 +14,7 @@ const alumnos = [
     { "idGrupo": 1, "idEstudiante": 7, "StrNombre": "Daniel Noah", "intNumeroLista": 7 },
     { "idGrupo": 1, "idEstudiante": 8, "StrNombre": "Perla Luz", "intNumeroLista": 8 },
   
-    { "idGrupo": 2, "idEstudiante": 9, "StrNombre": "Juan Pablo", "intNumeroLista": 1 },
+    { "idGrupo": 2, "idEstudiante": 9, "StrNombre": "Said Alejandro", "intNumeroLista": 1 },
     { "idGrupo": 2, "idEstudiante": 10, "StrNombre": "Sara Luz", "intNumeroLista": 2 },
     { "idGrupo": 2, "idEstudiante": 11, "StrNombre": "Maria Fernanda", "intNumeroLista": 3 },
     { "idGrupo": 2, "idEstudiante": 12, "StrNombre": "Pedro Luis", "intNumeroLista": 4 },
@@ -23,7 +23,7 @@ const alumnos = [
     { "idGrupo": 2, "idEstudiante": 15, "StrNombre": "Samuel Jose", "intNumeroLista": 7 },
     { "idGrupo": 2, "idEstudiante": 16, "StrNombre": "Noah Emanuel", "intNumeroLista": 8 },
   
-    { "idGrupo": 3, "idEstudiante": 17, "StrNombre": "Juan Pablo", "intNumeroLista": 1 },
+    { "idGrupo": 3, "idEstudiante": 17, "StrNombre": "Quico Tercero", "intNumeroLista": 1 },
     { "idGrupo": 3, "idEstudiante": 18, "StrNombre": "Maria Fernanda", "intNumeroLista": 2 },
     { "idGrupo": 3, "idEstudiante": 19, "StrNombre": "Pedro Luis", "intNumeroLista": 3 },
     { "idGrupo": 3, "idEstudiante": 20, "StrNombre": "Emanuel Jose", "intNumeroLista": 4 },
@@ -32,7 +32,7 @@ const alumnos = [
     { "idGrupo": 3, "idEstudiante": 23, "StrNombre": "Daniel Samuel", "intNumeroLista": 7 },
     { "idGrupo": 3, "idEstudiante": 24, "StrNombre": "Liam Luz", "intNumeroLista": 8 },
   
-    { "idGrupo": 4, "idEstudiante": 25, "StrNombre": "Juan Pablo", "intNumeroLista": 1 },
+    { "idGrupo": 4, "idEstudiante": 25, "StrNombre": "Karla Estrada", "intNumeroLista": 1 },
     { "idGrupo": 4, "idEstudiante": 26, "StrNombre": "Maria Fernanda", "intNumeroLista": 2 },
     { "idGrupo": 4, "idEstudiante": 27, "StrNombre": "Pedro Luis", "intNumeroLista": 3 },
     { "idGrupo": 4, "idEstudiante": 28, "StrNombre": "Sofia Sara", "intNumeroLista": 4 },
@@ -41,7 +41,7 @@ const alumnos = [
     { "idGrupo": 4, "idEstudiante": 31, "StrNombre": "Ana Fernanda", "intNumeroLista": 7 },
     { "idGrupo": 4, "idEstudiante": 32, "StrNombre": "Emanuel Liam", "intNumeroLista": 8 },
   
-    { "idGrupo": 5, "idEstudiante": 33, "StrNombre": "Juan Pablo", "intNumeroLista": 1 },
+    { "idGrupo": 5, "idEstudiante": 33, "StrNombre": "Matias Lerdo", "intNumeroLista": 1 },
     { "idGrupo": 5, "idEstudiante": 34, "StrNombre": "Sara Luz", "intNumeroLista": 2 },
     { "idGrupo": 5, "idEstudiante": 35, "StrNombre": "Maria Fernanda", "intNumeroLista": 3 },
     { "idGrupo": 5, "idEstudiante": 36, "StrNombre": "Pedro Luis", "intNumeroLista": 4 },
@@ -50,7 +50,7 @@ const alumnos = [
     { "idGrupo": 5, "idEstudiante": 39, "StrNombre": "Perla Ana", "intNumeroLista": 7 },
     { "idGrupo": 5, "idEstudiante": 40, "StrNombre": "Liam Emanuel", "intNumeroLista": 8 },
   
-    { "idGrupo": 6, "idEstudiante": 41, "StrNombre": "Juan Pablo", "intNumeroLista": 1 },
+    { "idGrupo": 6, "idEstudiante": 41, "StrNombre": "Pedro Aldahir", "intNumeroLista": 1 },
     { "idGrupo": 6, "idEstudiante": 42, "StrNombre": "Maria Fernanda", "intNumeroLista": 2 },
     { "idGrupo": 6, "idEstudiante": 43, "StrNombre": "Pedro Luis", "intNumeroLista": 3 },
     { "idGrupo": 6, "idEstudiante": 44, "StrNombre": "Emanuel Jose", "intNumeroLista": 4 },
@@ -59,7 +59,7 @@ const alumnos = [
     { "idGrupo": 6, "idEstudiante": 47, "StrNombre": "Daniel Noah", "intNumeroLista": 7 },
     { "idGrupo": 6, "idEstudiante": 48, "StrNombre": "Perla Luz", "intNumeroLista": 8 },
   
-    { "idGrupo": 7, "idEstudiante": 49, "StrNombre": "Juan Pablo", "intNumeroLista": 1 },
+    { "idGrupo": 7, "idEstudiante": 49, "StrNombre": "Mario Fernando", "intNumeroLista": 1 },
     { "idGrupo": 7, "idEstudiante": 50, "StrNombre": "Maria Fernanda", "intNumeroLista": 2 },
     { "idGrupo": 7, "idEstudiante": 51, "StrNombre": "Pedro Luis", "intNumeroLista": 3 },
     { "idGrupo": 7, "idEstudiante": 52, "StrNombre": "Emanuel Jose", "intNumeroLista": 4 },
@@ -68,7 +68,7 @@ const alumnos = [
     { "idGrupo": 7, "idEstudiante": 55, "StrNombre": "Daniel Samuel", "intNumeroLista": 7 },
     { "idGrupo": 7, "idEstudiante": 56, "StrNombre": "Liam Luz", "intNumeroLista": 8 },
   
-    { "idGrupo": 8, "idEstudiante": 57, "StrNombre": "Juan Pablo", "intNumeroLista": 1 },
+    { "idGrupo": 8, "idEstudiante": 57, "StrNombre": "Francisco Perez", "intNumeroLista": 1 },
     { "idGrupo": 8, "idEstudiante": 58, "StrNombre": "Maria Fernanda", "intNumeroLista": 2 },
     { "idGrupo": 8, "idEstudiante": 59, "StrNombre": "Pedro Luis", "intNumeroLista": 3 },
     { "idGrupo": 8, "idEstudiante": 60, "StrNombre": "Sofia Sara", "intNumeroLista": 4 },
