@@ -6,6 +6,8 @@ import Login from "@/components/login/Login";
 export default function Index() {
   const navigation = useNavigation();
   const isWeb = Platform.OS === "web";
+  
+  
 
   useEffect(() => {
     if (isWeb) {
