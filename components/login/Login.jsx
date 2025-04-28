@@ -72,7 +72,7 @@ const Login = () => {
         method: "POST",
         
         body: JSON.stringify({
-          username: usuario,
+          usuario: usuario,
           password: password,
         }),
       });
