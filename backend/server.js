@@ -24,10 +24,10 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  const { username, password } = req.body;
+  //const { username, password } = req;
 
-  console.log("Cuerpo de la solicitud:", req.body); // Verifica lo que llega al servidor
-
+  console.log("req de la solicitud:", req); // Verifica lo que llega al servidor
+  console.log("res de la solicitud:", res);
   try {
     const [rows] = await pool.query(
       "SELECT * FROM users WHERE usuario = ? AND password = ?",
