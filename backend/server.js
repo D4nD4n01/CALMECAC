@@ -20,15 +20,17 @@ const pool = mysql.createPool({
 });
 
 app.get("/", async (req, res) => {
-  res.send("Servidor funcionando 😎");
+  res.send("Servidor funcionando POR FIN; YA ERA HORA");
 });
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  
+
+  console.log("Cuerpo de la solicitud:", req.body); // Verifica lo que llega al servidor
+
   try {
     const [rows] = await pool.query(
-      "SELECT * FROM users WHERE username = ? AND password = ?",
+      "SELECT * FROM users WHERE usuario = ? AND password = ?",
       [username, password]
     );
 
@@ -42,6 +44,7 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ success: false, message: "Error en el servidor" });
   }
 });
+
 
 app.listen(port, () => {
   console.log(`Servidor backend corriendo en el puerto ${port}`);

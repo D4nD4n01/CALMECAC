@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import logo from "../../assets/images/logo.jpg";
 import Loading from "../../utils/Loading"
+import paths from "../../paths"
 
 const Login = () => {
   const navigation = useNavigation();
@@ -65,42 +66,28 @@ const Login = () => {
   }, []);
 
 
-  const ingresar = async () => {
-    console.log("usuario:", usuario,password)
-    if (!usuario || !password) {
-      alert("Por favor ingresa usuario y contraseña");
-      return;
-    }
-
-    setLoading(true);
-
+  async function ingresar() {
     try {
-      const response = fetch("https://server/login", {
+      const response = await fetch(paths.URL+paths.LOGIN, {
         method: "POST",
+        
         body: JSON.stringify({
           username: usuario,
           password: password,
         }),
       });
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        await guardarUserID(data.user.id); // o data.userID si tu backend responde diferente
-        setUsuario("");
-        setPassword("");
-        setLoading(false);
-        navigation.replace("MyGroups");
-      } else {
-        setLoading(false);
-        alert(data.message || "Usuario o contraseña incorrectos.");
+      if (!response.ok) {
+        throw new Error(`Error HTTP: ${response.status}`);
       }
+
+      const data = await response.json();
+      console.log("Respuesta del servidor:", data);
     } catch (error) {
       console.error("Error al ingresar:", error);
-      setLoading(false);
-      alert("Error al conectar con el servidor.");
     }
-  };
+  }
+
 
 
   if (loading) {
