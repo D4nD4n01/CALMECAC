@@ -19,6 +19,12 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [isWeb, setIsWeb] = useState(Platform.OS === "web" ? true : false)
 
+  let MYSQL = {
+    MYSQL_URL:"mysql://root:CgMIXsYWjNGDLmfKVXgzFPLOMznDxEcq@mysql.railway.internal:3306/railway"
+  }
+
+  let conect = 0/*${{ MySQL.MYSQL_URL }}*/
+
   const acount = [
     { userID: 1, user: "Memin", pass: "Memin" },
     { userID: 2, user: "Arandez", pass: "Arancel" },
