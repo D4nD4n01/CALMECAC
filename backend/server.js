@@ -1,25 +1,31 @@
 import express from "express";
+import cors from "cors";
 import mysql from "mysql2/promise";
-import bodyParser from "body-parser"; // Para leer req.body
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
+app.use(cors());
+app.use(express.json());
 
-// Conexión a Railway
 const pool = mysql.createPool({
-  host: process.env.MYSQLHOST,
-  user: process.env.MYSQLUSER,
-  password: process.env.MYSQLPASSWORD,
-  database: process.env.MYSQLDATABASE,
-  port: Number(process.env.MYSQLPORT),
+  host: process.env.DB_HOST,        // ej: mysql-production-afe9.up.railway.app
+  user: process.env.DB_USER,        // ej: root
+  password: process.env.DB_PASSWORD,// contraseña
+  database: process.env.DB_DATABASE,// railway
+  port: process.env.DB_PORT,        // 3306
 });
 
-// Ruta para login
+app.get("/", async (req, res) => {
+  res.send("Servidor funcionando 😎");
+});
+
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-
+  
   try {
     const [rows] = await pool.query(
       "SELECT * FROM users WHERE username = ? AND password = ?",
@@ -27,16 +33,16 @@ app.post("/login", async (req, res) => {
     );
 
     if (rows.length > 0) {
-      res.json({ success: true, message: "Login exitoso", user: rows[0] });
+      res.json({ success: true, user: rows[0] });
     } else {
       res.status(401).json({ success: false, message: "Usuario o contraseña incorrectos" });
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Error en el servidor");
+    console.error("Error en login:", error);
+    res.status(500).json({ success: false, message: "Error en el servidor" });
   }
 });
 
 app.listen(port, () => {
-  console.log(`Servidor corriendo en el puerto ${port}`);
+  console.log(`Servidor backend corriendo en el puerto ${port}`);
 });
