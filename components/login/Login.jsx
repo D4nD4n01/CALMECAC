@@ -19,12 +19,12 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [isWeb, setIsWeb] = useState(Platform.OS === "web" ? true : false)
 
-  const acount = [
+  /*const acount = [
     { userID: 1, user: "Memin", pass: "Memin" },
     { userID: 2, user: "Arandez", pass: "Arancel" },
     { userID: 3, user: "Pulido", pass: "qtal" },
     { userID: 4, user: "prueba", pass: "123" },
-  ];
+  ];*/
 
   const guardarUserID = async (id) => {
     try {
@@ -63,25 +63,45 @@ const Login = () => {
 
     verificarSesion();
   }, []);
-  
+
 
   const ingresar = async () => {
-    setLoading(true)
-    const validUser = acount.find(
-      (account) => account.user === usuario && account.pass === password
-    );
+    console.log("usuario:", usuario,password)
+    if (!usuario || !password) {
+      alert("Por favor ingresa usuario y contraseña");
+      return;
+    }
 
-    if (validUser) {
-      await guardarUserID(validUser.userID);
-      setUsuario("");
-      setPassword("");
-      setLoading(false)
-      navigation.replace("MyGroups");
-    } else {
-      setLoading(false)
-      alert("Usuario o contraseña incorrectos.");
+    setLoading(true);
+
+    try {
+      const response = fetch("https://server/login", {
+        method: "POST",
+        body: JSON.stringify({
+          username: usuario,
+          password: password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        await guardarUserID(data.user.id); // o data.userID si tu backend responde diferente
+        setUsuario("");
+        setPassword("");
+        setLoading(false);
+        navigation.replace("MyGroups");
+      } else {
+        setLoading(false);
+        alert(data.message || "Usuario o contraseña incorrectos.");
+      }
+    } catch (error) {
+      console.error("Error al ingresar:", error);
+      setLoading(false);
+      alert("Error al conectar con el servidor.");
     }
   };
+
 
   if (loading) {
     return (
