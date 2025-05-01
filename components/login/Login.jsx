@@ -20,12 +20,12 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [isWeb, setIsWeb] = useState(Platform.OS === "web" ? true : false)
 
-  /*const acount = [
+  const acount = [
     { userID: 1, user: "Memin", pass: "Memin" },
     { userID: 2, user: "Arandez", pass: "Arancel" },
     { userID: 3, user: "Pulido", pass: "qtal" },
     { userID: 4, user: "prueba", pass: "123" },
-  ];*/
+  ];
 
   const guardarUserID = async (id) => {
     try {
@@ -67,7 +67,7 @@ const Login = () => {
 
 
   async function ingresar() {
-    try {
+    /*try {
       const response = await fetch(paths.URL+paths.LOGIN, {
         method: "POST",
         
@@ -85,7 +85,21 @@ const Login = () => {
       console.log("Respuesta del servidor:", data);
     } catch (error) {
       console.error("Error al ingresar:", error);
-    }
+    }*/
+      setLoading(true)
+      const validUser = acount.find(
+        (account) => account.user === usuario && account.pass === password
+      );
+      if (validUser) {
+        await guardarUserID(validUser.userID);
+        setUsuario("");
+        setPassword("");
+        setLoading(false)
+        navigation.replace("MyGroups");
+      } else {
+        setLoading(false)
+        alert("Usuario o contraseña incorrectos.");
+      }
   }
 
 
