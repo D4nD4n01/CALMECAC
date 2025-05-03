@@ -1,6 +1,8 @@
 // backend/procedures.js
 const db = require("./db");
 
+
+
 // Login de maestro
 async function loginTeacher(email, password) {
   const [rows] = await db.query("CALL LoginTeacher(?, ?)", [email, password]);
