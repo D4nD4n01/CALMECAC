@@ -67,14 +67,22 @@ const Login = () => {
 
 
   async function ingresar() {
-    /*try {
-      const response = await fetch(paths.URL+paths.LOGIN, {
+    const body = {
+      usuario: usuario,
+      password: password,
+    };
+
+    console.log("cuerpo:", body);
+
+    try {
+      console.log("datos mandados:", usuario, password);
+
+      const response = await fetch(paths.URL + paths.LOGIN, {
         method: "POST",
-        
-        body: JSON.stringify({
-          usuario: usuario,
-          password: password,
-        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
       });
 
       if (!response.ok) {
@@ -83,24 +91,25 @@ const Login = () => {
 
       const data = await response.json();
       console.log("Respuesta del servidor:", data);
-    } catch (error) {
-      console.error("Error al ingresar:", error);
-    }*/
-      setLoading(true)
-      const validUser = acount.find(
-        (account) => account.user === usuario && account.pass === password
-      );
-      if (validUser) {
-        await guardarUserID(validUser.userID);
+
+      if (data.success) {
+        // Aquí accedes al ID del usuario
+        await guardarUserID(data.user.id);  // Asegúrate que sea `id` y no `userID`
         setUsuario("");
         setPassword("");
-        setLoading(false)
+        setLoading(false);
         navigation.replace("MyGroups");
       } else {
-        setLoading(false)
+        setLoading(false);
         alert("Usuario o contraseña incorrectos.");
       }
+    } catch (error) {
+      setLoading(false);
+      console.error("Error al ingresar:", error);
+      alert("Error en el servidor. Intenta más tarde.");
+    }
   }
+
 
 
 
