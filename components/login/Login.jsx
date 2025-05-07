@@ -67,6 +67,7 @@ const Login = () => {
 
 
   async function ingresar() {
+    setLoading(true)
     const body = {
       usuario: usuario,
       password: password,
@@ -108,15 +109,7 @@ const Login = () => {
       console.error("Error al ingresar:", error);
       alert("Error en el servidor. Intenta más tarde.");
     }
-  }
-
-
-
-
-  if (loading) {
-    return (
-      <Loading />
-    );
+    setLoading(false)
   }
 
   return (
@@ -146,7 +139,6 @@ const Login = () => {
           }}
         />
       </View>
-
       <View
         style={{
           backgroundColor: "white",
@@ -156,6 +148,7 @@ const Login = () => {
           elevation: 5,
         }}
       >
+        {loading? <Loading color={"#FFF"}/> : null}
         <Text
           style={{
             fontSize: 20,

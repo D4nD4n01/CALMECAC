@@ -44,7 +44,6 @@ pool.getConnection()
 
 
 app.post("/login", async (req, res) => {
-  console.log("Cuerpo recibido:", req.body);
   const { usuario, password } = req.body;
   console.log("Usuario recibido: ", usuario, password)
 
