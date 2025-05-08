@@ -46,13 +46,13 @@ const Group = ({ data }) => {
       >
         {/* Materia como título */}
         <Text style={{ fontSize: 16, fontWeight: "bold", color: "#8B0000" }}>
-          {data.Materia}
+          {data.strSubject}
         </Text>
 
         {/* Grado, Salón y Hora como texto secundario */}
-        <Text style={{ color: "#5C5C5C" }}>Grado: {data.IdGroup}</Text>
-        <Text style={{ color: "#5C5C5C" }}>Salón: {data.salon}</Text>
-        <Text style={{ color: "#5C5C5C" }}>Hora: {data.hora}</Text>
+        <Text style={{ color: "#5C5C5C" }}>Grado: {data.intGrade}</Text>
+        <Text style={{ color: "#5C5C5C" }}>Salón: {data.strClassroom}</Text>
+        <Text style={{ color: "#5C5C5C" }}>Hora: {data.strHour}</Text>
       </View>
     </TouchableOpacity>
   );
