@@ -1,15 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-
+import paths from "../../paths"
 
 const Register = ({ }) => {
 
+  const [usuario, setUsuario] = useState("");
+  const [password, setPassword] = useState("");
+
+
   const navigation = useNavigation();
 
-  const reedirigir = () => {
-    navigation.replace("Login");
-  }
+  const registrarUsuario = async () => {
+    if (!usuario || !password) {
+      alert("Por favor, completa todos los campos.");
+      return;
+    }
+
+    try {
+      const response = await fetch(paths.URL + paths.LOGIN, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          intMode: 1,
+          usuario,
+          password,
+        }),
+      });
+
+      console.log("Datos enviados: ", usuario, password)
+      const result = await response.json();
+      console.log("Resultado del registro:", result);
+
+      if (result.success) {
+        alert("Usuario registrado con éxito");
+        navigation.replace("Login");
+      } else {
+        alert("No se pudo registrar el usuario.");
+      }
+    } catch (error) {
+      console.error("Error al registrar:", error);
+      alert("Hubo un problema al registrar el usuario.");
+    }
+  };
+
 
   return (
     <View
@@ -70,20 +104,8 @@ const Register = ({ }) => {
             marginBottom: 15,
           }}
           placeholder="Ingrese su nombre"
-          placeholderTextColor="#666"
-        />
-
-        <TextInput
-          style={{
-            width: "100%",
-            height: 40,
-            borderWidth: 1,
-            borderColor: "#ccc",
-            borderRadius: 5,
-            paddingHorizontal: 10,
-            marginBottom: 15,
-          }}
-          placeholder="Ingrese su correo"
+          value={usuario}
+          onChangeText={setUsuario}
           placeholderTextColor="#666"
         />
 
@@ -99,6 +121,8 @@ const Register = ({ }) => {
           }}
           placeholder="Ingrese su contraseña"
           secureTextEntry
+          value={password}
+          onChangeText={setPassword}
           placeholderTextColor="#666"
         />
 
@@ -109,7 +133,7 @@ const Register = ({ }) => {
             borderRadius: 5,
             alignItems: "center",
           }}
-          onPress={reedirigir}
+           onPress={registrarUsuario}
         >
           <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
             Registrarse

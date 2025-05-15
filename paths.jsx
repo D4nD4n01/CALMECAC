@@ -1,9 +1,9 @@
 // archivo de rutas.js
-const Rutas = {
+const paths  = {
     URL: "https://calmecac-backend-production.up.railway.app/",
-    LOGIN: "login",
-    COURSE: "course"
+    LOGIN: "wsCRUDlogin",
+    COURSE: "wsCRUDcourse"
   };
   
-  export default Rutas;
+  export default paths ;
   

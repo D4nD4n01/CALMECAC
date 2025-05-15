@@ -20,13 +20,6 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [isWeb, setIsWeb] = useState(Platform.OS === "web" ? true : false)
 
-  const acount = [
-    { userID: 1, user: "Memin", pass: "Memin" },
-    { userID: 2, user: "Arandez", pass: "Arancel" },
-    { userID: 3, user: "Pulido", pass: "qtal" },
-    { userID: 4, user: "prueba", pass: "123" },
-  ];
-
   const guardarUserID = async (id) => {
     try {
       if (Platform.OS === "web") {
@@ -62,16 +55,18 @@ const Login = () => {
       setLoading(false);
     };
 
-    verificarSesion();
+    verificarSesion()
   }, []);
 
 
   async function ingresar() {
     setLoading(true)
     const body = {
+      intMode: 0,
       usuario: usuario,
       password: password,
     };
+
 
     console.log("cuerpo:", body);
 
@@ -134,7 +129,7 @@ const Login = () => {
           style={{
             width: 80,
             height: 80,
-            borderRadius: 40,
+            borderRadius: 20,
             backgroundColor: "gray",
           }}
         />
@@ -148,7 +143,7 @@ const Login = () => {
           elevation: 5,
         }}
       >
-        {loading? <Loading color={"#FFF"}/> : null}
+        {loading ? <Loading color={"#FFF"} /> : null}
         <Text
           style={{
             fontSize: 20,
@@ -225,7 +220,6 @@ const Login = () => {
       </View>
     </View>
   );
-
 };
 
 export default Login;

@@ -32,23 +32,26 @@ const MyGroups = () => {
 
   const obtenerCursos = async () => {
     const idTeacher = getUserID(); // lo obtienes desde localStorage
-  
+
     if (!idTeacher) {
       console.error("No se encontró el ID del usuario.");
       return;
     }
-  
+
     try {
       const response = await fetch(paths.URL + paths.COURSE, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ idTeacher }),
+        body: JSON.stringify({
+          intMode: 0,
+          idTeacher,
+        }),
       });
-  
+
       const result = await response.json();
-  
+
       if (result.success) {
         console.log("Cursos encontrados:", result.data);
         setGroups(result.data)
@@ -59,7 +62,7 @@ const MyGroups = () => {
       console.error("Error al obtener cursos:", error);
     }
   };
-  
+
 
   return (
     <View style={{ flex: 1, padding: 16, backgroundColor: "#FBE9E7" }}>
