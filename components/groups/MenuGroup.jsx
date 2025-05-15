@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Ionicons } from "@expo/vector-icons"; // Asegúrate de tener instalado este paquete
 
 const MenuGroup = ({ navigation }) => {
   const [groupId, setGroupId] = useState(0);
+  const [curso, setCurso] = useState(null);
+
 
   const obtenerUserID = async () => {
     try {
@@ -14,7 +15,7 @@ const MenuGroup = ({ navigation }) => {
         return await AsyncStorage.getItem("userID");
       }
     } catch (error) {
-      console.error("Error obteniendo userID:", error);
+      console.error("Error obteniendo groupID:", error);
     }
   };
 
@@ -51,7 +52,30 @@ const MenuGroup = ({ navigation }) => {
   useEffect(() => {
     obtenerUserID();
     obtenerGrupoID();
+    obtenerCurso()
   }, []);
+
+  const obtenerCurso = async () => {
+    try {
+      const response = await fetch(paths.URL + paths.getCOURSE, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ idCourse: groupId }) // 👈 Aquí mandas el ID del grupo
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setCurso(data.result); // 👈 Aquí guardas el curso en estado
+      } else {
+        console.error("Curso no encontrado");
+      }
+    } catch (error) {
+      console.error("Error al obtener el curso:", error);
+    }
+  };
+
 
   const handleVerAsistencia = () => {
     navigation.navigate("ListaAsistencia", {});

@@ -2,7 +2,8 @@
 const paths  = {
     URL: "https://calmecac-backend-production.up.railway.app/",
     LOGIN: "wsCRUDlogin",
-    COURSE: "wsCRUDcourse"
+    COURSE: "wsCRUDcourse",
+    getCOURSE: "getcourse"
   };
   
   export default paths ;
