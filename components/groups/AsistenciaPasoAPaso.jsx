@@ -97,7 +97,7 @@ const alumnos = [
   ];
 
 const AsistenciaPasoAPaso = ({ navigation }) => {
-  const [grupoID, setGrupoID] = useState(2);
+  const [grupoID, setGrupoID] = useState();
   const [alumnosFiltrados, setAlumnosFiltrados] = useState([]);
   const [indiceActual, setIndiceActual] = useState(0);
 

@@ -7,7 +7,6 @@ const Group = ({ data }) => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    console.log("group: ", data);
   }, []);
 
   const handlePress = () => {
@@ -18,9 +17,9 @@ const Group = ({ data }) => {
   const guardarGroupID = async () => {
     try {
       if (Platform.OS === "web") {
-        localStorage.setItem("groupID", data.IdGroup.toString());
+        localStorage.setItem("groupID", data.idCourse.toString());
       } else {
-        await AsyncStorage.setItem("groupID", data.IdGroup.toString());
+        await AsyncStorage.setItem("groupID", data.idCourse.toString());
       }
     } catch (error) {
       console.error("Error guardando groupID:", error);

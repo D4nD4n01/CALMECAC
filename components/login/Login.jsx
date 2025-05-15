@@ -54,7 +54,6 @@ const Login = () => {
       }
       setLoading(false);
     };
-
     verificarSesion()
   }, []);
 
@@ -67,12 +66,7 @@ const Login = () => {
       password: password,
     };
 
-
-    console.log("cuerpo:", body);
-
     try {
-      console.log("datos mandados:", usuario, password);
-
       const response = await fetch(paths.URL + paths.LOGIN, {
         method: "POST",
         headers: {
