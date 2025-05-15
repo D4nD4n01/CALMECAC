@@ -127,7 +127,7 @@ const MyGroups = () => {
       )}
 
       {showAddGroup && (
-        <AddGroupModal visible={showAddGroup} onClose={() => setShowAddGroup(false)} />
+        <AddGroupModal visible={showAddGroup} onClose={() => setShowAddGroup(false)} update ={obtenerCursos}/>
       )}
     </View>
   );
