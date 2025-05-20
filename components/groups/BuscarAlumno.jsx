@@ -10,9 +10,15 @@ const BuscarAlumno = ({ navigation }) => {
   const [busqueda, setBusqueda] = useState("");
   const [groups, setGroups] = useState([])
   const [groupId, setGroupId] = useState(0)
+  const [loading, setLoading] = useState(false)
+
+  const filtrados = groups.filter((item) =>
+    item.strName.toLowerCase().includes(busqueda.toLowerCase())
+  );
 
   const obtenerGrupoID = async () => {
     try {
+      setLoading(true)
       let id;
       if (Platform.OS == "web") {
         id = localStorage.getItem("groupID");
@@ -20,13 +26,16 @@ const BuscarAlumno = ({ navigation }) => {
         id = await AsyncStorage.getItem("groupID");
       }
       setGroupId(parseInt(id));
+      setLoading(false)
     } catch (e) {
+      setLoading(false)
       console.error("Error obteniendo el ID del grupo:", e);
     }
   };
 
   const obtenerDataGroup = async () => {
     try {
+      setLoading(true)
       const response = await fetch(paths.URL + paths.STUDENTS, {
         method: "POST",
         headers: {
@@ -39,9 +48,8 @@ const BuscarAlumno = ({ navigation }) => {
       });
 
       const result = await response.json();
-
+      setLoading(false)
       if (result.success) {
-        console.log()
         setGroups(result.data)
       } else {
         console.error("Error al obtener alumnos:", result.message);
@@ -100,6 +108,9 @@ const BuscarAlumno = ({ navigation }) => {
       </View>
 
       <View style={{ padding: 20, flex: 1 }}>
+        {
+          loading ? <Loading /> : null
+        }
 
         <TextInput
           style={{
@@ -120,7 +131,7 @@ const BuscarAlumno = ({ navigation }) => {
 
         {groupId > 0 ?
           <FlatList
-            data={groups}
+            data={filtrados}
             keyExtractor={(item) => item.idStudent}
             renderItem={({ item }) => (
               <View style={{

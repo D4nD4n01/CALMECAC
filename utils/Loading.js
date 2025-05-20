@@ -4,7 +4,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
-const Loading = ({ color }) => {
+const Loading = ({ }) => {
    return (
       <View style={styles.container}>
         <DotLottieReact
