@@ -8,7 +8,6 @@ import Consult from "../components/web/Consult.jsx"
 import MenuGroup from "../components/groups/MenuGroup.jsx"
 import ListaAsistencia from "../components/groups/ListaAsistencia.jsx"
 import BuscarAlumno from "../components/groups/BuscarAlumno.jsx"
-import AsistenciaPasoAPaso from "../components/groups/AsistenciaPasoAPaso.jsx"
 
 const Stack = createStackNavigator();
 
@@ -25,7 +24,6 @@ export default function AppNavigator() {
         <Stack.Screen name="MenuGroup" component={MenuGroup} options={{ headerShown: false }}/>
         <Stack.Screen name="ListaAsistencia" component={ListaAsistencia} options={{ headerShown: false }}/>
         <Stack.Screen name="BuscarAlumno" component={BuscarAlumno} options={{ headerShown: false }}/>
-        <Stack.Screen name="AsistenciaPasoAPaso" component={AsistenciaPasoAPaso} options={{ headerShown: false }}/>
       </Stack.Navigator>
   );
 }
