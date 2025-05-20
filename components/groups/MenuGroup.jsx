@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import paths from "../../paths"
 
 const MenuGroup = ({ navigation }) => {
   const [groupId, setGroupId] = useState(0);
@@ -52,10 +53,14 @@ const MenuGroup = ({ navigation }) => {
   useEffect(() => {
     obtenerUserID();
     obtenerGrupoID();
-    obtenerCurso()
   }, []);
 
+  useEffect(() => {
+    obtenerCurso()
+  }, [groupId]);
+
   const obtenerCurso = async () => {
+    console.log("grupo: ",groupId)
     try {
       const response = await fetch(paths.URL + paths.getCOURSE, {
         method: "POST",
@@ -66,6 +71,7 @@ const MenuGroup = ({ navigation }) => {
       });
 
       const data = await response.json();
+      console.log("data: ", data)
       if (data.success) {
         setCurso(data.result); // 👈 Aquí guardas el curso en estado
       } else {
@@ -104,9 +110,13 @@ const MenuGroup = ({ navigation }) => {
           elevation: 4
         }}
       >
-        <Text style={{ fontSize: 22, fontWeight: "bold", color: "white" }}>
-          Grupo: {groupId}
-        </Text>
+
+        {curso && (
+          <Text style={{ fontSize: 22, fontWeight: "bold", color: "white" }}>
+            Curso: {curso.strSubject}
+          </Text>
+        )}
+
 
         <TouchableOpacity
           onPress={salirDelGrupo}

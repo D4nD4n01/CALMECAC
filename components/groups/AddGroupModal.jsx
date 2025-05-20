@@ -59,7 +59,7 @@ const AddGroupModal = ({ visible, onClose, update}) => {
       if (result.success) {
         update()
         setLoading(false)
-        onClose(); // Cierra el modal
+        onClose(); 
       } else {
         alert("Error al guardar", result.message || "Inténtalo de nuevo");
         setLoading(false)
