@@ -14,26 +14,13 @@ import Loading from "../../utils/Loading";
 const isWeb = Platform.OS === "web";
 
 const AddGroupModal = ({ visible, onClose, update = () => { }, groupData = {} }) => {
-  const [subject, setSubject] = useState("");
-  const [grade, setGrade] = useState("");
-  const [hour, setHour] = useState("");
-  const [classroom, setClassroom] = useState("");
+  const [subject, setSubject] = useState(groupData.strSubject || "");
+  const [grade, setGrade] = useState(groupData.intGrade?.toString() || "");
+  const [hour, setHour] = useState(groupData.strHour || "");
+  const [classroom, setClassroom] = useState(groupData.strClassroom || "");
   const [loading, setLoading] = useState(false);
   const isEditMode = groupData?.idCourse > 0;
 
-  useEffect(() => {
-    if (isEditMode) {
-      setSubject(groupData.strSubject || "");
-      setGrade(groupData.intGrade?.toString() || "");
-      setHour(groupData.strHour || "");
-      setClassroom(groupData.strClassroom || "");
-    } else {
-      setSubject("");
-      setGrade("");
-      setHour("");
-      setClassroom("");
-    }
-  }, [groupData, visible]);
 
   const getUserID = async () => {
     try {
@@ -111,7 +98,6 @@ const AddGroupModal = ({ visible, onClose, update = () => { }, groupData = {} })
       const result = await response.json();
 
       if (result.success) {
-        alert("Grupo eliminado exitosamente.");
         update();
         onClose(); // Cierra el modal
       } else {
