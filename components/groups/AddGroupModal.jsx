@@ -13,7 +13,7 @@ import Loading from "../../utils/Loading";
 
 const isWeb = Platform.OS === "web";
 
-const AddGroupModal = ({ visible, onClose, update = () => {}, groupData = {} }) => {
+const AddGroupModal = ({ visible, onClose, update = () => { }, groupData = {} }) => {
   const [subject, setSubject] = useState("");
   const [grade, setGrade] = useState("");
   const [hour, setHour] = useState("");
@@ -93,6 +93,37 @@ const AddGroupModal = ({ visible, onClose, update = () => {}, groupData = {} }) 
       setLoading(false);
     }
   };
+
+  const handleDelete = async () => {
+    try {
+      setLoading(true)
+      const response = await fetch(paths.URL + paths.COURSE, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          intMode: 3,
+          idCourse: groupData.idCourse,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert("Grupo eliminado exitosamente.");
+        update();
+        onClose(); // Cierra el modal
+      } else {
+        alert("Error al eliminar el grupo: " + (result.message || "Intenta de nuevo."));
+      }
+      setLoading(false)
+    } catch (error) {
+      console.error("Error en la eliminación:", error);
+      alert("Error de red al intentar eliminar el grupo.");
+    }
+  };
+
 
   return (
     <Modal transparent visible={visible} animationType="slide">
@@ -187,7 +218,7 @@ const AddGroupModal = ({ visible, onClose, update = () => {}, groupData = {} }) 
                   marginRight: 8,
                   alignItems: "center",
                 }}
-                onPress={() => console.log("Eliminar grupo")}
+                onPress={handleDelete}
               >
                 <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }}>
                   Eliminar grupo
