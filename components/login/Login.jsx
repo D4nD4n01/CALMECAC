@@ -74,13 +74,13 @@ const Login = () => {
         },
         body: JSON.stringify(body),
       });
-
-      if (!response.success) {
-        alert(response.message)
+       const data = await response.json();
+      if (!data.success) {
+        alert(data.message)
         return
       }
 
-      const data = await response.json();
+     
       console.log("Respuesta del servidor:", data);
 
       if (data.success) {
