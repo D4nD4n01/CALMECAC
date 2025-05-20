@@ -51,7 +51,6 @@ const ListaAsistencia = ({ route, navigation }) => {
       const result = await response.json();
 
       if (result.success) {
-        console.log("Alumnos del curso:", result.data);
         setGroups(result.data)
         setDataGroup(true)
       } else {

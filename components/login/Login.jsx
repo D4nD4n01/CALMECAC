@@ -80,9 +80,6 @@ const Login = () => {
         return
       }
 
-     
-      console.log("Respuesta del servidor:", data);
-
       if (data.success) {
         // Aquí accedes al ID del usuario
         await guardarUserID(data.user.id);  // Asegúrate que sea `id` y no `userID`

@@ -8,12 +8,7 @@ const isWeb = Platform.OS === "web";
 const AsistenciaPasoAPaso = ({ navigation, groupId, dataGroup}) => {
 
   const [indiceActual, setIndiceActual] = useState(0);
-
-
-
-
   const marcarAsistencia = (tipo) => {
-    // Aquí podrías guardar la asistencia si deseas
     if (indiceActual < dataGroup.length - 1) {
       setIndiceActual(indiceActual + 1);
     } else {
@@ -33,9 +28,7 @@ const AsistenciaPasoAPaso = ({ navigation, groupId, dataGroup}) => {
 
   return (
     <View style={styles.container}>
-      {/* Botón cerrar */}
       
-
       <View style={styles.card}>
         <Text style={styles.nombre}>
           {alumno.intNumberList}. {alumno.strName}
