@@ -61,7 +61,6 @@ const ListaAsistencia = ({ route, navigation }) => {
       console.error("Error en la petición:", error);
       return [];
     }
-
   }
 
   useEffect(() => {
