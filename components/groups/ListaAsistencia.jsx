@@ -6,11 +6,51 @@ import {
 } from "react-native";
 
 import AsistenciaPasoAPaso from "./AsistenciaPasoAPaso";
+import { useState, useEffect } from "react";
+import Loading from "@/utils/Loading";
 
 const ListaAsistencia = ({ route, navigation }) => {
+  const [groupID, setGroupId] = useState(0)
+  const [dataLoad, setDataLoad] = useState(false)
   const abrirLectorQR = () => {
     console.log("Abrir lector QR próximamente...");
   };
+
+  useEffect(() => {
+    obtenerGrupoID();
+  }, []);
+
+  const obtenerUserID = async () => {
+    try {
+      if (Platform.OS === "web") {
+        return localStorage.getItem("userID");
+      } else {
+        return await AsyncStorage.getItem("userID");
+      }
+    } catch (error) {
+      console.error("Error obteniendo groupID:", error);
+    }
+  };
+
+  const obtenerGrupoID = async () => {
+    try {
+      let id;
+      if (Platform.OS === "web") {
+        id = localStorage.getItem("groupID");
+      } else {
+        id = await AsyncStorage.getItem("groupID");
+      }
+
+      if (id) {
+        setGroupId(parseInt(id));
+        console.log("")
+      }
+    } catch (e) {
+      console.error("Error obteniendo el ID del grupo:", e);
+    }
+  };
+
+
 
   return (
     <View style={{ flex: 1, backgroundColor: "#FFF5F5" }}>
@@ -52,8 +92,12 @@ const ListaAsistencia = ({ route, navigation }) => {
       </View>
 
       {/* Componente paso a paso */}
-      <AsistenciaPasoAPaso navigation={navigation} />
-
+      {dataLoad ?
+        <AsistenciaPasoAPaso navigation={navigation} group={groupID} />
+        : null
+      }{
+        dataLoad ? <Loading /> : null
+      }
       {/* Botón lector QR */}
       <View style={{
         flexDirection: "row",

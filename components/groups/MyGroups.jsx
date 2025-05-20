@@ -53,7 +53,6 @@ const MyGroups = () => {
       const result = await response.json();
 
       if (result.success) {
-        console.log("Cursos encontrados:", result.data);
         setGroups(result.data)
       } else {
         console.warn("No se encontraron cursos para este maestro.");

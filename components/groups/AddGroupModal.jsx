@@ -53,7 +53,6 @@ const AddGroupModal = ({ visible, onClose, update}) => {
         },
         body: JSON.stringify(obj),
       });
-      console.log(obj)
       const result = await response.json();
 
       if (result.success) {

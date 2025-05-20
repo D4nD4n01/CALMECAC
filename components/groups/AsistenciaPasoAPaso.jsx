@@ -96,30 +96,11 @@ const alumnos = [
     { "idGrupo": 10, "idEstudiante": 80, "StrNombre": "Juan Pablo", "intNumeroLista": 8 }
   ];
 
-const AsistenciaPasoAPaso = ({ navigation }) => {
-  const [grupoID, setGrupoID] = useState();
+const AsistenciaPasoAPaso = ({ navigation, group}) => {
+  const [grupoID, setGrupoID] = useState(group);
   const [alumnosFiltrados, setAlumnosFiltrados] = useState([]);
   const [indiceActual, setIndiceActual] = useState(0);
 
-  useEffect(() => {
-    const obtenerGrupoID = async () => {
-      try {
-        let id = null
-        if (isWeb) {
-            id = localStorage.getItem("groupID");
-          } else {
-            id = await AsyncStorage.getItem("groupID");
-          }
-        if (id) {
-          setGrupoID(parseInt(id));
-        }
-      } catch (e) {
-        console.error("Error obteniendo el ID del grupo:", e);
-      }
-    };
-
-    obtenerGrupoID();
-  }, []);
 
   useEffect(() => {
     if (grupoID !== null) {

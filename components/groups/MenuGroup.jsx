@@ -60,8 +60,8 @@ const MenuGroup = ({ navigation }) => {
   }, [groupId]);
 
   const obtenerCurso = async () => {
-    console.log("grupo: ",groupId)
     try {
+      if (groupId == 0) return
       const response = await fetch(paths.URL + paths.getCOURSE, {
         method: "POST",
         headers: {
@@ -71,9 +71,8 @@ const MenuGroup = ({ navigation }) => {
       });
 
       const data = await response.json();
-      console.log("data: ", data)
       if (data.success) {
-        setCurso(data.result); // 👈 Aquí guardas el curso en estado
+        setCurso(data.data); // 👈 Aquí guardas el curso en estado
       } else {
         console.error("Curso no encontrado");
       }
@@ -113,7 +112,7 @@ const MenuGroup = ({ navigation }) => {
 
         {curso && (
           <Text style={{ fontSize: 22, fontWeight: "bold", color: "white" }}>
-            Curso: {curso.strSubject}
+            {curso.strSubject}   {curso.strClassroom}
           </Text>
         )}
 
