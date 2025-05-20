@@ -75,8 +75,9 @@ const Login = () => {
         body: JSON.stringify(body),
       });
 
-      if (!response.ok) {
-        throw new Error(`Error HTTP: ${response.status}`);
+      if (!response.success) {
+        alert(response.message)
+        return
       }
 
       const data = await response.json();
