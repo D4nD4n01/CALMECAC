@@ -8,29 +8,19 @@ import { Platform } from "react-native";
 import AsistenciaPasoAPaso from "./AsistenciaPasoAPaso";
 import { useState, useEffect } from "react";
 import Loading from "@/utils/Loading";
+import paths from "../../paths"
 
 const ListaAsistencia = ({ route, navigation }) => {
-  const [groupID, setGroupId] = useState(0)
+  const [groupId, setGroupId] = useState(0)
   const [dataIdGroup, setDataIdGroup] = useState(false)
   const [dataGroup, setDataGroup] = useState(false)
+  const [groups, setGroups] = useState([])
+
   const abrirLectorQR = () => {
     console.log("Abrir lector QR próximamente...");
   };
 
-  const obtenerUserID = async () => {
-    try {
-      if (Platform.OS === "web") {
-        return localStorage.getItem("userID");
-      } else {
-        return await AsyncStorage.getItem("userID");
-      }
-    } catch (error) {
-      console.error("Error obteniendo groupID:", error);
-    }
-  };
-
   const obtenerGrupoID = async () => {
- 
     try {
       let id;
       if (Platform.OS == "web") {
@@ -38,7 +28,6 @@ const ListaAsistencia = ({ route, navigation }) => {
       } else {
         id = await AsyncStorage.getItem("groupID");
       }
-      
       setGroupId(parseInt(id));
       setDataIdGroup(true)
     } catch (e) {
@@ -46,9 +35,43 @@ const ListaAsistencia = ({ route, navigation }) => {
     }
   };
 
+  const obtenerDataGroup = async() => {
+    try {
+      const response = await fetch(paths.URL + paths.STUDENTS, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          intMode: 0,
+          idCourse: groupId,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        console.log("Alumnos del curso:", result.data);
+        setGroups(result.data)
+        setDataGroup(true)
+      } else {
+        console.error("Error al obtener alumnos:", result.message);
+        return ;
+      }
+    } catch (error) {
+      console.error("Error en la petición:", error);
+      return [];
+    }
+
+  }
+
   useEffect(() => {
     obtenerGrupoID();
   }, []);
+
+  useEffect(() => {
+    groupId > 0 ? obtenerDataGroup() : null
+  }, [groupId]);
 
 
   return (
@@ -92,7 +115,7 @@ const ListaAsistencia = ({ route, navigation }) => {
 
       {/* Componente paso a paso */}
       {
-        dataIdGroup && dataGroup ? <AsistenciaPasoAPaso navigation={navigation} group={groupID}/> : <Loading  />
+        dataIdGroup && dataGroup ? <AsistenciaPasoAPaso navigation={navigation} group={groupId} dataGroup={groups} /> : <Loading />
       }
       {/* Botón lector QR */}
       <View style={{
