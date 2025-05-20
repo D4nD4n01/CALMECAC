@@ -93,8 +93,8 @@ const estudiantes = [
   { "idGrupo": 10, "idEstudiante": 80, "StrNombre": "Juan Pablo", "intNumeroLista": 8 }
 ];
 
-const BuscarAlumno = ({ route, navigation }) => {
-  console.log("estudiantes: ",estudiantes)
+const BuscarAlumno = ({navigation }) => {
+  console.log("estudiantes: ", estudiantes)
 
   const [busqueda, setBusqueda] = useState("");
 
@@ -105,7 +105,7 @@ const BuscarAlumno = ({ route, navigation }) => {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#FFF5F5" }}>
-      
+
       {/* Cabecera */}
       <View style={{
         backgroundColor: "#6B0000",
@@ -121,11 +121,29 @@ const BuscarAlumno = ({ route, navigation }) => {
         }}>
           Buscar Alumno
         </Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("MenuGroup")}
+          style={{
+            position: "absolute",
+            top: 20,
+            right: 20,
+            backgroundColor: "#6B0000",
+            padding: 5,
+            borderRadius: 10,
+            zIndex: 10,
+          }}
+        >
+          <Text style={{
+            color: "#FBE9E7",
+            fontWeight: "bold",
+            fontSize: 18,
+          }}>X</Text>
+        </TouchableOpacity>
       </View>
 
       {/* Contenido */}
       <View style={{ padding: 20, flex: 1 }}>
-        
+
         {/* Input de búsqueda */}
         <TextInput
           style={{

@@ -140,8 +140,7 @@ app.post("/getcourse", async (req, res) => {
     if (!idCourse || isNaN(idCourse)) {
       return res.status(400).json({
         success: false,
-        message: "Parámetro 'idCourse' inválido o faltante",
-        data:req
+        message: "Parámetro 'idCourse' inválido o faltante"
       });
     }
 
@@ -160,7 +159,7 @@ app.post("/getcourse", async (req, res) => {
 
     return res.json({
       success: true,
-      data: rows[0] 
+      data: rows[0] // Solo se devuelve un curso
     });
   } catch (error) {
     console.error("Error en /getcourse:", error);

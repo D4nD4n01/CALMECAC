@@ -96,18 +96,17 @@ const alumnos = [
     { "idGrupo": 10, "idEstudiante": 80, "StrNombre": "Juan Pablo", "intNumeroLista": 8 }
   ];
 
-const AsistenciaPasoAPaso = ({ navigation, group}) => {
-  const [grupoID, setGrupoID] = useState(group);
+const AsistenciaPasoAPaso = ({ navigation, groupId, dataGroup}) => {
   const [alumnosFiltrados, setAlumnosFiltrados] = useState([]);
   const [indiceActual, setIndiceActual] = useState(0);
 
 
   useEffect(() => {
-    if (grupoID !== null) {
-      const filtrados = alumnos.filter((al) => al.idGrupo === grupoID);
+    if (groupId !== null) {
+      const filtrados = alumnos.filter((al) => al.idGrupo === groupId);
       setAlumnosFiltrados(filtrados);
     }
-  }, [grupoID]);
+  }, [groupId]);
 
   const marcarAsistencia = (tipo) => {
     // Aquí podrías guardar la asistencia si deseas
