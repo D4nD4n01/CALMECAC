@@ -90,7 +90,7 @@ const MyGroups = () => {
         contentContainerStyle={styles.scrollContent}
       >
         {groups && groups.length > 0 ? (
-          groups.map((group, index) => <Group key={index} data={group} />)
+          groups.map((group, index) => <Group key={index} data={group} update={obtenerCursos}/>)
         ) : (
           <View style={{ marginTop: 50, alignItems: "center" }}>
             <Text style={{ fontSize: 16, color: "#6c757d" }}>

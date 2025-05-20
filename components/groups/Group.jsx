@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons"; // Usa íconos si usas Expo
 import AddGroupModal from "./AddGroupModal"; // Ajusta el path si es necesario
 
 
-const Group = ({ data }) => {
+const Group = ({ data, update }) => {
   const navigation = useNavigation();
   const [showAddGroup, setShowAddGroup] = useState(false);
 
@@ -82,6 +82,7 @@ const Group = ({ data }) => {
         <AddGroupModal
           visible={showAddGroup}
           onClose={() => setShowAddGroup(false)}
+          update= {update}
           groupData={data} // Envías los datos del grupo actual
         />
       )}

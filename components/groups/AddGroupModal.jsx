@@ -85,8 +85,9 @@ const AddGroupModal = ({ visible, onClose, update = () => {}, groupData = {} }) 
         onClose();
       } else {
         alert("Error al guardar", result.message || "Inténtalo de nuevo");
-        setLoading(false);
       }
+      setLoading(false);
+
     } catch (error) {
       alert("Error de red", error.message);
       setLoading(false);
