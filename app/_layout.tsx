@@ -16,7 +16,7 @@ export default function AppNavigator() {
 
 
   return (
-      <Stack.Navigator initialRouteName={Platform.OS == "android"?"Login" : "Consult"}>
+      <Stack.Navigator initialRouteName={Platform.OS == "web"?"Consult" : "Login"}>
         <Stack.Screen name="Index" component={Index} options={{ headerShown: false }}/>
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
         <Stack.Screen name="Register" component={Register} options={{ headerShown: false }}/>
