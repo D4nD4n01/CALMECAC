@@ -82,7 +82,6 @@ const Group = ({ data }) => {
         <AddGroupModal
           visible={showAddGroup}
           onClose={() => setShowAddGroup(false)}
-          update={obtenerCursos}
           groupData={data} // Envías los datos del grupo actual
         />
       )}

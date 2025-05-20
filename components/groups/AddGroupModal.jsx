@@ -1,18 +1,39 @@
 // src/groups/AddGroupModal.jsx
-import React, { useState } from "react";
-import { Modal, View, Text, TextInput, TouchableOpacity, Platform } from "react-native";
-import paths from "../../paths"
-import Loading from "../../utils/Loading"
+import React, { useState, useEffect } from "react";
+import {
+  Modal,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
+import paths from "../../paths";
+import Loading from "../../utils/Loading";
 
 const isWeb = Platform.OS === "web";
 
-const AddGroupModal = ({ visible, onClose, update}) => {
-
+const AddGroupModal = ({ visible, onClose, update = () => {}, groupData = {} }) => {
   const [subject, setSubject] = useState("");
   const [grade, setGrade] = useState("");
   const [hour, setHour] = useState("");
   const [classroom, setClassroom] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const isEditMode = groupData?.idCourse > 0;
+
+  useEffect(() => {
+    if (isEditMode) {
+      setSubject(groupData.strSubject || "");
+      setGrade(groupData.intGrade?.toString() || "");
+      setHour(groupData.strHour || "");
+      setClassroom(groupData.strClassroom || "");
+    } else {
+      setSubject("");
+      setGrade("");
+      setHour("");
+      setClassroom("");
+    }
+  }, [groupData, visible]);
 
   const getUserID = async () => {
     try {
@@ -27,23 +48,26 @@ const AddGroupModal = ({ visible, onClose, update}) => {
   };
 
   const handleSave = async () => {
-    setLoading(true)
+    setLoading(true);
+
     if (!subject || !grade || !hour || !classroom) {
       alert("Todos los campos son obligatorios");
+      setLoading(false);
       return;
     }
 
     const userID = await getUserID();
 
     const obj = {
-      intMode:1,
+      intMode: isEditMode ? 2 : 1,
       strSubject: subject,
       strClassroom: classroom,
       strHour: hour,
       intGrade: parseInt(grade),
-      idTeacher: userID
-
+      idTeacher: userID,
     };
+
+    if (isEditMode) obj.idCourse = groupData.idCourse;
 
     try {
       const response = await fetch(paths.URL + paths.COURSE, {
@@ -56,16 +80,16 @@ const AddGroupModal = ({ visible, onClose, update}) => {
       const result = await response.json();
 
       if (result.success) {
-        update()
-        setLoading(false)
-        onClose(); 
+        update();
+        setLoading(false);
+        onClose();
       } else {
         alert("Error al guardar", result.message || "Inténtalo de nuevo");
-        setLoading(false)
+        setLoading(false);
       }
     } catch (error) {
       alert("Error de red", error.message);
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -108,7 +132,7 @@ const AddGroupModal = ({ visible, onClose, update}) => {
             <Text style={{ fontSize: 16, color: "#fff", fontWeight: "bold" }}>X</Text>
           </TouchableOpacity>
 
-          {loading ? <Loading/> : null}
+          {loading ? <Loading /> : null}
 
           <Text
             style={{
@@ -119,7 +143,7 @@ const AddGroupModal = ({ visible, onClose, update}) => {
               textAlign: "center",
             }}
           >
-            Añadir nuevo grupo
+            {isEditMode ? "Editar grupo" : "Añadir nuevo grupo"}
           </Text>
 
           <TextInput
@@ -151,19 +175,41 @@ const AddGroupModal = ({ visible, onClose, update}) => {
             onChangeText={setClassroom}
           />
 
-          <TouchableOpacity
-            onPress={handleSave}
-            style={{
-              backgroundColor: "#8B0000",
-              padding: 12,
-              borderRadius: 8,
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }}>
-              Guardar
-            </Text>
-          </TouchableOpacity>
+          <View style={{ flexDirection: isEditMode ? "row" : "column", justifyContent: "space-between" }}>
+            {isEditMode && (
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "#B22222",
+                  padding: 12,
+                  borderRadius: 8,
+                  flex: 1,
+                  marginRight: 8,
+                  alignItems: "center",
+                }}
+                onPress={() => console.log("Eliminar grupo")}
+              >
+                <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }}>
+                  Eliminar grupo
+                </Text>
+              </TouchableOpacity>
+            )}
+
+            <TouchableOpacity
+              onPress={handleSave}
+              style={{
+                backgroundColor: "#8B0000",
+                padding: 12,
+                borderRadius: 8,
+                flex: 1,
+                marginTop: isEditMode ? 0 : 15,
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }}>
+                Guardar
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>
