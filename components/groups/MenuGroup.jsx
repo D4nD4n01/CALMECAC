@@ -153,7 +153,7 @@ const MenuGroup = ({ navigation }) => {
         <TouchableOpacity
           onPress={handleVerAsistencia}
           style={{
-            backgroundColor: "#A52A2A",
+            backgroundColor: "#8B0000",
             paddingVertical: 12,
             borderRadius: 8,
             marginBottom: 15,

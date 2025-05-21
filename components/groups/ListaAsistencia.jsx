@@ -18,6 +18,7 @@ const ListaAsistencia = ({ route, navigation }) => {
 
   const abrirLectorQR = () => {
     console.log("Abrir lector QR próximamente...");
+    alert("Abrir lector QR próximamente...")
   };
 
   const obtenerGrupoID = async () => {

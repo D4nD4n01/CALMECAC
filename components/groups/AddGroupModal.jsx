@@ -101,6 +101,7 @@ const AddGroupModal = ({ visible, onClose, update = () => { }, groupData = {} })
       if (result.success) {
         update();
         onClose(); // Cierra el modal
+        alert("Grupo eliminado correctamente.");
       } else {
         alert("Error al eliminar el grupo: " + (result.message || "Intenta de nuevo."));
       }
