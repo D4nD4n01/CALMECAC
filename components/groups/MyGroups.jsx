@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   logout: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 14,
+    fontSize: 18,
   },
   centered: {
     marginBottom: 16,
