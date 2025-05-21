@@ -139,6 +139,23 @@ const Register = ({ }) => {
             Registrarse
           </Text>
         </TouchableOpacity>
+        
+        <Text
+          style={{
+          textAlign: "center",
+          marginTop: 10,
+          fontSize: 14,
+          color: "#333",
+          }}
+        >
+        Regrese al inicio de sesión{" "}
+        <Text
+          style={{ color: "#A52A2A", fontWeight: "bold" }} // enlace color morena
+          onPress={() => navigation.navigate("Login")}
+        >
+          Inicio de sesión
+          </Text>
+        </Text>
       </View>
     </View>
   );

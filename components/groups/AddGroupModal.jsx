@@ -69,6 +69,7 @@ const AddGroupModal = ({ visible, onClose, update = () => { }, groupData = {} })
       if (result.success) {
         update();
         setLoading(false);
+        alert("Grupo guardado correctamente.");
         onClose();
       } else {
         alert("Error al guardar", result.message || "Inténtalo de nuevo");
